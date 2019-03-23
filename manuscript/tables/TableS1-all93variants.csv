@@ -215,7 +215,7 @@
 "CNAG_00651","chr1",1694356,1697782,3426,"null","ATP-binding cassette, subfamily D (ALD), peroxisomal long-chain fatty acid import protein",0,0,2,2
 "CNAG_00653","chr1",1701095,1704056,2961,"null","hypothetical protein CNAG_00653",0,3,0,3
 "CNAG_00654","chr1",1705239,1705730,491,"SRX1","sulfiredoxin",0,1,0,1
-"CNAG_00657","chr1",1708978,1709762,784,"null","hypothetical protein CNAG_00657",0,0,0,0
+"CNAG_00657","chr1",1708978,1709762,784,"null","hypothetical protein CNAG_00657",1,0,0,1
 "CNAG_00658","chr1",1710449,1712659,2210,"null","hypothetical protein CNAG_00658",0,1,0,1
 "CNAG_00660","chr1",1713340,1716027,2687,"null","histone deacetylase HOS3",1,0,0,1
 "CNAG_00662","chr1",1718893,1720152,1259,"null","carboxymethylenebutenolidase",0,4,0,4
@@ -930,7 +930,7 @@
 "CNAG_05571","chr14",665806,674266,8460,"null","U3 small nucleolar RNA-associated protein 20",1,0,0,1
 "CNAG_05580","chr14",687177,688167,990,"null","hypothetical protein CNAG_05580",0,1,0,1
 "CNAG_05581","chr14",688759,693231,4472,"CHS3","chitin synthase",1,3,0,4
-"CNAG_05583","chr14",695945,697547,1602,"GCS1","ceramide glucosyltransferase",0,0,0,0
+"CNAG_05583","chr14",695945,697547,1602,"GCS1","ceramide glucosyltransferase",1,0,0,1
 "CNAG_05585","chr14",699600,700641,1041,"null","arf/Sar family protein",0,0,1,1
 "CNAG_05587","chr14",705694,707141,1447,"null","hypothetical protein CNAG_05587",1,0,0,1
 "CNAG_05588","chr14",707701,712813,5112,"null","hypothetical protein CNAG_05588",0,1,0,1
@@ -951,7 +951,7 @@
 "CNAG_05622","chr14",804417,808920,4503,"RPH1","specific transcriptional repressor",0,2,0,2
 "CNAG_05623","chr14",809438,810920,1482,"null","chorismate synthase",0,1,0,1
 "CNAG_05626","chr14",814886,815974,1088,"null","hypothetical protein CNAG_05626",0,1,0,1
-"CNAG_05627","chr14",816234,818728,2494,"null","ATP-dependent rRNA helicase SPB4",0,0,0,0
+"CNAG_05627","chr14",816234,818728,2494,"null","ATP-dependent rRNA helicase SPB4",1,0,0,1
 "CNAG_05628","chr14",818938,821957,3019,"null","hypothetical protein CNAG_05628",0,1,0,1
 "CNAG_05630","chr14",825400,826966,1566,"null","hypothetical protein CNAG_05630",0,1,0,1
 "CNAG_05631","chr14",827845,829649,1804,"null","NADH-ubiquinone oxidoreductase 49 kDa subunit, mitochondrial",0,2,0,2
@@ -1002,7 +1002,7 @@
 "CNAG_06712","chr2",249447,250053,606,"null","hypothetical protein CNAG_06712",0,2,0,2
 "CNAG_06710","chr2",251902,252661,759,"null","hypothetical protein CNAG_06710",0,1,0,1
 "CNAG_06706","chr2",262148,263310,1162,"null","proline-, glutamic acid- and leucine-rich protein 1",0,1,0,1
-"CNAG_03597","chr2",290217,294055,3838,"null","hypothetical protein CNAG_03597",0,0,0,0
+"CNAG_03597","chr2",290217,294055,3838,"null","hypothetical protein CNAG_03597",1,0,0,1
 "CNAG_03599","chr2",296389,298911,2522,"null","mandelate racemase/muconate lactonizing enzyme",1,0,0,1
 "CNAG_03600","chr2",299137,304126,4989,"STE6","ATP-binding cassette, subfamily B (MDR/TAP), member 1",1,0,2,3
 "CNAG_07964","chr2",304415,309697,5282,"null","hypothetical protein CNAG_07964",1,0,1,2
@@ -1526,7 +1526,7 @@
 "CNAG_05244","chr4",823296,825448,2152,"null","hypothetical protein CNAG_05244",0,2,1,3
 "CNAG_05245","chr4",829807,830546,739,"null","hypothetical protein CNAG_05245",0,20,0,20
 "CNAG_05247","chr4",832949,834336,1387,"SLC1","lysophosphatidate acyltransferase",1,6,4,11
-"CNAG_05248","chr4",834753,837513,2760,"null","clathrin binding protein",2,0,10,12
+"CNAG_05248","chr4",834753,837513,2760,"null","clathrin binding protein",3,0,10,13
 "CNAG_07976","chr4",837936,839980,2044,"null","hypothetical protein CNAG_07976",1,0,0,1
 "CNAG_05250","chr4",842196,845206,3010,"null","telomere maintenance protein",0,2,0,2
 "CNAG_05251","chr4",847184,848301,1117,"null","hypothetical protein CNAG_05251",0,0,2,2
@@ -1644,7 +1644,7 @@
 "CNAG_01337","chr5",565291,567702,2411,"null","WD-repeat protein",1,0,1,2
 "CNAG_01336","chr5",568067,569683,1616,"null","hypothetical protein CNAG_01336",0,1,0,1
 "CNAG_01335","chr5",570276,572200,1924,"null","hypothetical protein CNAG_01335",0,1,0,1
-"CNAG_01334","chr5",573160,577414,4254,"null","hypothetical protein CNAG_01334",6,1,1,8
+"CNAG_01334","chr5",573160,577414,4254,"null","hypothetical protein CNAG_01334",7,1,1,9
 "CNAG_01333","chr5",578252,579985,1733,"null","Haspin protein kinase",1,0,0,1
 "CNAG_01332","chr5",580238,581006,768,"null","small subunit ribosomal protein S24e",0,1,0,1
 "CNAG_01330","chr5",583261,586125,2864,"null","hypothetical protein CNAG_01330",1,0,0,1
@@ -2112,7 +2112,7 @@
 "CNAG_05745","chr7",749042,752653,3611,"null","cytoplasmic protein",1,0,0,1
 "CNAG_05746","chr7",752895,755614,2719,"null","Swi5-dependent recombination DNA repair protein 1",0,1,0,1
 "CNAG_05755","chr7",781857,783274,1417,"null","protein MAK16",0,1,0,1
-"CNAG_05756","chr7",783523,784442,919,"null","mitochondrial protein",0,1,0,1
+"CNAG_05756","chr7",783523,784442,919,"null","mitochondrial protein",1,1,0,2
 "CNAG_05761","chr7",802205,802836,631,"null","cyclin-dependent kinase regulatory subunit CKS1",0,1,0,1
 "CNAG_05762","chr7",803485,804044,559,"null","large subunit acidic ribosomal protein P2",0,1,0,1
 "CNAG_05766","chr7",809669,812043,2374,"SPR1","endoglucanase C",0,1,0,1
@@ -2173,13 +2173,13 @@
 "CNAG_05887","chr7",1120067,1121372,1305,"null","pre-mRNA-splicing factor 18",0,3,0,3
 "CNAG_05888","chr7",1121481,1121995,514,"null","hypothetical protein CNAG_05888",2,2,0,4
 "CNAG_05894","chr7",1132927,1148016,15089,"null","dynein heavy chain 1, cytosolic",0,1,3,4
-"CNAG_05903","chr7",1170289,1171602,1313,"null","hypothetical protein CNAG_05903",2,15,2,19
+"CNAG_05903","chr7",1170289,1171602,1313,"null","hypothetical protein CNAG_05903",3,15,2,20
 "CNAG_05905","chr7",1172992,1175444,2452,"null","transcription factor IIIB 90 kDa subunit",0,0,1,1
 "CNAG_05906","chr7",1175883,1177139,1256,"null","hypothetical protein CNAG_05906",1,0,0,1
 "CNAG_05908","chr7",1182581,1185172,2591,"null","hypothetical protein CNAG_05908",1,1,0,2
 "CNAG_05909","chr7",1187122,1188390,1268,"null","cytochrome c1, heme protein, mitochondrial",0,1,0,1
-"CNAG_05910","chr7",1189418,1193699,4281,"null","hypothetical protein CNAG_05910",3,4,5,12
-"CNAG_05911","chr7",1194262,1195759,1497,"null","hypothetical protein CNAG_05911",6,0,1,7
+"CNAG_05910","chr7",1189418,1193699,4281,"null","hypothetical protein CNAG_05910",4,4,5,13
+"CNAG_05911","chr7",1194262,1195759,1497,"null","hypothetical protein CNAG_05911",7,0,1,8
 "CNAG_05912","chr7",1196368,1199805,3437,"null","hypothetical protein CNAG_05912",0,1,0,1
 "CNAG_05913","chr7",1200590,1202647,2057,"null","alpha-glucosidase",0,1,0,1
 "CNAG_05917","chr7",1210607,1211256,649,"null","hypothetical protein CNAG_05917",1,0,0,1
@@ -2294,7 +2294,7 @@
 "CNAG_03332","chr8",668775,670081,1306,"null","replication factor C subunit 2/4",0,2,0,2
 "CNAG_03333","chr8",670648,673560,2912,"null","cytoplasmic protein",0,1,0,1
 "CNAG_03337","chr8",682367,682978,611,"null","hypothetical protein CNAG_03337",0,2,0,2
-"CNAG_03339","chr8",684431,686559,2128,"null","biotin transporter",2,0,0,2
+"CNAG_03339","chr8",684431,686559,2128,"null","biotin transporter",3,0,0,3
 "CNAG_03341","chr8",689458,692510,3052,"null","minichromosome maintenance protein 2",1,1,0,2
 "CNAG_03343","chr8",694814,695857,1043,"null","hypothetical protein CNAG_03343",0,1,0,1
 "CNAG_03347","chr8",711146,713803,2657,"null","ATP-dependent Clp protease ATP-binding subunit ClpB",1,2,0,3
@@ -2362,7 +2362,7 @@
 "CNAG_03524","chr8",1180709,1186594,5885,"null","transmembrane receptor",0,3,0,3
 "CNAG_03528","chr8",1198427,1202221,3794,"null","AP-2 complex subunit alpha",0,1,0,1
 "CNAG_07995","chr8",1202853,1205833,2980,"null","hypothetical protein CNAG_07995",0,5,1,6
-"CNAG_03531","chr8",1206371,1207397,1026,"null","3-beta hydroxysteroid dehydrogenase/isomerase",2,0,1,3
+"CNAG_03531","chr8",1206371,1207397,1026,"null","3-beta hydroxysteroid dehydrogenase/isomerase",3,0,1,4
 "CNAG_03532","chr8",1207965,1209003,1038,"null","3-beta hydroxysteroid dehydrogenase/isomerase",1,0,0,1
 "CNAG_03533","chr8",1209375,1212622,3247,"null","JmjC domain-containing histone demethylation protein 1",1,0,1,2
 "CNAG_03539","chr8",1226784,1229272,2488,"null","hypothetical protein CNAG_03539",1,0,0,1

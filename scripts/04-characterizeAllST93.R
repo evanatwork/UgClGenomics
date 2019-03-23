@@ -25,6 +25,19 @@ chrLens <- c(2291499, 1621675, 1575141, 1084805, 1814975, 1422463, 1399503, 1398
 centelo <- read.table("data_in/general/centromeres_telomeres_cna3.gff", sep="\t", as.is=TRUE)
 centelo <- rbind(centelo, c("chr5", "prediction", "MAT", 185700 , 275730, ".", "+", ".", "locus_tag Chr5 MAT"))
 
+hypoRNAs <- read.csv("data_in/general/190422hypotheticalRNAs.csv")
+locs <- substr(hypoRNAs$Genomic.Location, 11, 30)
+locs.ddn <- strsplit(locs, " ")
+chromStart <- as.numeric(unlist(lapply(locs.ddn, function(x) x[[1]])))
+chromEnd <- as.numeric(unlist(lapply(locs.ddn, function(x) x[[3]])))
+chrom <- paste0("chr", hypoRNAs$Chromosome)
+Strand <- ifelse(hypoRNAs$Gene.Strand == "forward", "+", "-")
+name <- hypoRNAs$Gene.ID
+length <- chromEnd - chromStart
+description <- "hypothetical RNA"
+alias <- "null"
+hypoRNAs.df <- data.frame(chrom, chromStart, chromEnd, length, Strand, name, description, alias)
+
 ###########################
 #Characterize the whole set
 ###########################
@@ -66,7 +79,6 @@ all93.df <- data.frame(all93.numVar)
 names(all93.df)[1] <- "name"
 all93.df$name <- as.character(all93.df$name) #2714
 all93.df.named_genes <- subset(all93.df, name %in% genes$name)
-#write.csv(all93.df, "manuscript/tables/TableS1-allST93variants.csv", row.names=FALSE)
 
 # #Look at the variants in genes (not hypothetical RNAs)
 # genes.all93 <- subset(genes, name %in% all93.df$name)
@@ -164,7 +176,6 @@ write.csv(all93_wFreq, "manuscript/tables/TableS1-all93variants.csv", row.names=
 all93_wFreq_high <-  subset(all93_wFreq, all93_wFreq$Freq > 10)
 write.csv(all93_wFreq_high, "manuscript/tables/TableS2_all93-highvariants.csv", row.names=FALSE)
 
-
 numGenesChr.ddn <- split(all93_wFreq, all93_wFreq$chrom)
 numGenesChr <- unlist(lapply(numGenesChr.ddn, function(x) length(x[,1])))
 numGenesChrCS <- cumsum(numGenesChr)
@@ -180,4 +191,58 @@ text(c(numGenesChr[1]/2, numGenesChr[2]/2+numGenesChrCS[1], numGenesChr[3]/2+num
 mtext("Position in genome", side=1, line=2)
 dev.off()
 
+########################################################################
+#Need unnamed genes too - these are the hypothetical RNAs and intergenic
+########################################################################
+all93.unnamed_genes <- subset(all93, gene %nin% genes$name) #357
+all93.isna <- subset(all93.unnamed_genes, is.na(gene)) #138
+all93.rna <- subset(all93.unnamed_genes, !is.na(gene)) #219
 
+all93.rna.ddn <- split(all93.rna, all93.rna$gene)
+
+names <- c()
+freq.gene <- c()
+freq.up <- c()
+freq.syn <- c()
+for (i in 1:length(all93.rna.ddn)){
+  names <- append(names, as.character(names(all93.unnamed_genes.ddn)[i]))
+  freq.gene <- append(freq.gene, nrow(subset(x, effect %in% c("NON_SYNONYMOUS_CODING", "STOP_GAINED", "START_GAINED", "CODON_CHANGE_PLUS_CODON_DELETION", "CODON_CHANGE_PLUS_CODON_INSERTION", "CODON_DELETION", "CODON_INSERTION", "FRAME_SHIFT", "SPLICE_SITE_ACCEPTOR", "SPLICE_SITE_DONOR", " STOP_LOST"))))
+  freq.up <- append(freq.up, nrow(subset(x, effect %in% c("UTR_5_PRIME", "UTR_3_PRIME", "UPSTREAM", "DOWNSTREAM"))))
+  freq.syn <- append(freq.syn, nrow(subset(x, effect %in% c("SYNONYMOUS_CODING"))))
+}
+
+all93.rna.df <- data.frame(name= names, freq.gene, freq.up, freq.syn)
+all93.rna.df.tRNA <- subset(all93.rna.df, names == "CNAG_10023")
+all93.rna.df <- subset(all93.rna.df, name !="CNAG_10023")
+all93.rna.df$chrom <- subset(hypoRNAs.df, name %in% all93.rna.df$name)$chrom
+all93.rna.df$chromStart <- subset(hypoRNAs.df, name %in% all93.rna.df$name)$chromStart
+all93.rna.df$chromEnd <- subset(hypoRNAs.df, name %in% all93.rna.df$name)$chromEnd
+all93.rna.df$length <- subset(hypoRNAs.df, name %in% all93.rna.df$name)$length
+all93.rna.df$alias <- subset(hypoRNAs.df, name %in% all93.rna.df$name)$alias
+all93.rna.df$description <- subset(hypoRNAs.df, name %in% all93.rna.df$name)$description
+all93.rna.df$Freq <- all93.rna.df$freq.up + all93.rna.df$freq.gene + all93.rna.df$freq.syn
+all93_gene_RNAs <- rbind(all93_wFreq, all93.rna.df)
+all93_gene_RNAs$name <- as.character(all93_gene_RNAs$name)
+all93_gene_RNAs$chrom <- as.character(all93_gene_RNAs$chrom)
+all93_gene_RNAs$alias <- as.character(all93_gene_RNAs$alias)
+all93_gene_RNAs$description <- as.character(all93_gene_RNAs$description)
+
+all93.rna.df.tRNA <- c(name= "CNAG_10023", description = "tRNA-OTHER", alias = "NULL", chrom = "chr2", chromStart = "911318", chromEnd = "911427", freq.gene = 0, freq.up = 1, freq.syn = 0, Freq = 1)
+
+all93_gene_RNAs <- rbind(all93_gene_RNAs, all93.rna.df.tRNA)
+
+all93.intergenic <- data.frame(all93.isna$CHROM)
+names(all93.intergenic)[1] <- "chrom"
+all93.intergenic$name <- NA
+all93.intergenic$chromStart <- all93.isna$POS
+all93.intergenic$chromEnd <- NA
+all93.intergenic$length <- 1
+all93.intergenic$alias <- NA
+all93.intergenic$description <- "intergenic"
+all93.intergenic$freq.gene <- 0
+all93.intergenic$freq.up <- 0
+all93.intergenic$freq.syn <- 0
+all93.intergenic$Freq <- 1
+
+all93_gene_RNAs_inter <- rbind(all93_gene_RNAs, all93.intergenic)
+write.csv(all93_wFreq, "manuscript/tables/TableS1-all93variants.csv", row.names=FALSE)

@@ -49,36 +49,36 @@ dWBC <- read.csv("data_in/phenotypes/COAT_WBC.csv")
 ###########################
 #Read in variants files
 ###########################
-var.dCSF <- read.csv("tables_intermediate/variants/var_dCSF.csv")
+var.dCSF <- read.csv("data_out/variants/var_dCSF.csv")
 var.dCSF$CP <- paste(var.dCSF$CHROM, var.dCSF$POS, sep=".")
-var.dWBC <- read.csv("tables_intermediate/variants/var_dWBC.csv")
+var.dWBC <- read.csv("data_out/variants/var_dWBC.csv")
 var.dWBC$CP <- paste(var.dWBC$CHROM, var.dWBC$POS, sep=".")
 
 ###########################
 #Read in significant variants files
 ###########################
-geneP.CSF <- read.csv("tables_intermediate/GWAS/geneP-CSF.csv")
-geneP.WBC <- read.csv("tables_intermediate/GWAS/geneP-WBC.csv")
-geneP.INV <- read.csv("tables_intermediate/GWAS/geneP-INV.csv")
+geneP.CSF <- read.csv("data_out/GWAS/geneP-CSF.csv")
+geneP.WBC <- read.csv("data_out/GWAS/geneP-WBC.csv")
+geneP.INV <- read.csv("data_out/GWAS/geneP-INV.csv")
 
 ###########################
 #Read in logistic regression variants files
 ###########################
-geneOdds.CSF <- read.csv("tables_intermediate/GWAS/geneOdds-CSF.csv", colClasses ="character")
+geneOdds.CSF <- read.csv("data_out/GWAS/geneOdds-CSF.csv", colClasses ="character")
 geneOdds.CSF$CP <- paste(geneOdds.CSF$CHROM, geneOdds.CSF$POS, sep=".")
-geneOdds.WBC <- read.csv("tables_intermediate/GWAS/geneOdds-WBC.csv", colClasses = "character")
+geneOdds.WBC <- read.csv("data_out/GWAS/geneOdds-WBC.csv", colClasses = "character")
 geneOdds.WBC$CP <- paste(geneOdds.WBC$CHROM, geneOdds.WBC$POS, sep=".")
-geneOdds.INV <- read.csv("tables_intermediate/GWAS/geneOdds-INV.csv", colClasses = "character")
+geneOdds.INV <- read.csv("data_out/GWAS/geneOdds-INV.csv", colClasses = "character")
 geneOdds.INV$CP <- paste(geneOdds.INV$CHROM, geneOdds.INV$POS, sep=".")
 
 ###########################
 #Read in stats info files
 ###########################
-geneStats.CSF <- read.csv("tables_intermediate/GWAS/geneStats-CSF.csv", colClasses ="character")
+geneStats.CSF <- read.csv("data_out/GWAS/geneStats-CSF.csv", colClasses ="character")
 geneStats.CSF$CP <- paste(geneStats.CSF$CHROM, geneStats.CSF$POS, sep=".")
-geneStats.WBC <- read.csv("tables_intermediate/GWAS/geneStats-WBC.csv", colClasses = "character")
+geneStats.WBC <- read.csv("data_out/GWAS/geneStats-WBC.csv", colClasses = "character")
 geneStats.WBC$CP <- paste(geneStats.WBC$CHROM, geneStats.WBC$POS, sep=".")
-geneStats.INV <- read.csv("tables_intermediate/GWAS/geneStats-INV.csv", colClasses = "character")
+geneStats.INV <- read.csv("data_out/GWAS/geneStats-INV.csv", colClasses = "character")
 geneStats.INV$CP <- paste(geneStats.INV$CHROM, geneStats.INV$POS, sep=".")
 
 ##########################

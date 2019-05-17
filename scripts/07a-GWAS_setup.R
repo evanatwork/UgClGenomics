@@ -1,5 +1,6 @@
 library(Hmisc)
 library(stringr)
+library(stringi)
 library(epiDisplay)
 
 upstreamCalc <- function(dataset){
@@ -43,18 +44,18 @@ invitrocols <- c(5:11)
 #Read in variants files
 ###########################
 classes<- c("character", "integer", rep("logical", 56),  "character", "character")
-some93TF.snps <- read.csv("tables_intermediate/variants/df-some93_snpsREFvALT.csv", colClasses=classes)
-some93otherTF.snps <- read.csv("tables_intermediate/variants/df-some93other_snpsREFvALT.csv", colClasses=classes)
-some93TF.ind <- read.csv("tables_intermediate/variants/df-some93_indelsREFvALT.csv", colClasses=classes)
+some93TF.snps <- read.csv("data_out/variants/df-some93_snpsREFvALT.csv", colClasses=classes)
+some93otherTF.snps <- read.csv("data_out/variants/df-some93other_snpsREFvALT.csv", colClasses=classes)
+some93TF.ind <- read.csv("data_out/variants/df-some93_indelsREFvALT.csv", colClasses=classes)
 some93TF.ind$status <- "some93"
-some93otherTF.ind <- read.csv("tables_intermediate/variants/df-some93other_indelsREFvALT.csv", colClasses=classes)
+some93otherTF.ind <- read.csv("data_out/variants/df-some93other_indelsREFvALT.csv", colClasses=classes)
 some93otherTF.ind$status <- "some93+other"
 
 columnTypes <- c("character", "integer", "character", "character", "numeric", "integer", "integer", "character", "factor", "factor", "factor", "character", rep("character", 56), "character", "character")
-some93.snps <- read.csv("tables_intermediate/variants/df-some93_snps.csv", colClasses=columnTypes)
-some93other.snps <- read.csv("tables_intermediate/variants/df-some93other_snps.csv", colClasses=columnTypes) #685
-some93.ind <- read.csv("tables_intermediate/variants/df-some93_indels.csv", colClasses=columnTypes)
-some93other.ind <- read.csv("tables_intermediate/variants/df-some93other_indels.csv", colClasses=columnTypes) #685
+some93.snps <- read.csv("data_out/variants/df-some93_snps.csv", colClasses=columnTypes)
+some93other.snps <- read.csv("data_out/variants/df-some93other_snps.csv", colClasses=columnTypes) #685
+some93.ind <- read.csv("data_out/variants/df-some93_indels.csv", colClasses=columnTypes)
+some93other.ind <- read.csv("data_out/variants/df-some93other_indels.csv", colClasses=columnTypes) #685
 
 some93TF.all <- rbind(some93TF.snps, some93otherTF.snps, some93TF.ind, some93otherTF.ind) #5605
 some93.all <- rbind(some93.snps, some93other.snps, some93.ind, some93other.ind) #5605
@@ -119,7 +120,7 @@ nonVar.dCSF <- nonVar.dCSF[-1,]
 var.dCSF <- var.dCSF[-1,]
 
 length(var.dCSF[,1]) #466 variants
-write.csv(var.dCSF, "tables_intermediate/variants/var_dCSF.csv", row.names=FALSE)
+write.csv(var.dCSF, "data_out/variants/var_dCSF.csv", row.names=FALSE)
 
 ########################
 #CSF Stats
@@ -181,9 +182,9 @@ traitSig <- apply(geneP.CSF[,7:25], 2, function(x) length(subset(x, x < 0.05)))
 geneP.CSF$numSig <- apply(geneP.CSF[,7:24], 1, function(x) length(subset(c(x), c(x) < 0.05)))
 names(geneP.CSF)[3:4] <- c("gene", "effect")
 names(geneP.CSF)[30:32] <- c("impact", "class", "AAchange")
-write.csv(geneP.CSF, "tables_intermediate/GWAS/geneP-CSF.csv", row.names=FALSE)
-write.csv(geneOdds.CSF, "tables_intermediate/GWAS/geneOdds-CSF.csv", row.names=FALSE)
-write.csv(pstats.CSF, "tables_intermediate/GWAS/geneStats-CSF.csv", row.names=FALSE)
+write.csv(geneP.CSF, "data_out/GWAS/geneP-CSF.csv", row.names=FALSE)
+write.csv(geneOdds.CSF, "data_out/GWAS/geneOdds-CSF.csv", row.names=FALSE)
+write.csv(pstats.CSF, "data_out/GWAS/geneStats-CSF.csv", row.names=FALSE)
 
 ##########################
 #WBC
@@ -209,7 +210,7 @@ for(k in 2:length(some93.eff.WBC[,1])){
 nonVar.dWBC <- nonVar.dWBC[-1,]
 length(var.dWBC[,1]) #652 variants
 
-write.csv(var.dWBC, "tables_intermediate/variants/var_dWBC.csv", row.names=FALSE)
+write.csv(var.dWBC, "data_out/variants/var_dWBC.csv", row.names=FALSE)
 
 j <- 0
 estimWBC <- list()
@@ -280,9 +281,9 @@ pstats.WBC$CP <- paste(pstats.WBC$CHROM, pstats.WBC$POS, sep=".")
 traitSig.WBC <- apply(geneP.WBC[,7:11], 2, function(x) length(subset(x, x < 0.05)))
 geneP.WBC$numSig <- apply(geneP.WBC[,7:11], 1, function(x) length(subset(c(x), c(x) < 0.05)))
 
-write.csv(geneP.WBC, "tables_intermediate/GWAS/geneP-WBC.csv", row.names=FALSE)
-write.csv(geneOdds.WBC, "tables_intermediate/GWAS/geneOdds-WBC.csv", row.names=FALSE)
-write.csv(pstats.WBC, "tables_intermediate/GWAS/geneStats-WBC.csv", row.names=FALSE)
+write.csv(geneP.WBC, "data_out/GWAS/geneP-WBC.csv", row.names=FALSE)
+write.csv(geneOdds.WBC, "data_out/GWAS/geneOdds-WBC.csv", row.names=FALSE)
+write.csv(pstats.WBC, "data_out/GWAS/geneStats-WBC.csv", row.names=FALSE)
 
 
 ##########################
@@ -292,6 +293,7 @@ some93.eff.invitro <- some93.eff[, names(some93.eff) %in% paste0("UgCl", strains
 some93.eff.invitro <- cbind(some93.eff.invitro, some93.eff[,c(1:12, 51)])
 some93.eff.invitro <- some93.eff.invitro[order(some93.eff.invitro$CP),]
 var.dinvitro <-some93.eff.invitro
+write.csv(var.dinvitro, "data_out/variants/var_dINV.csv", row.names=FALSE)
 
 nonVar.dINV <- data.frame(some93.eff.invitro[1,])
 var.dINV <- data.frame(some93.eff.invitro[1,])
@@ -372,6 +374,6 @@ geneStats.INV$CP <- paste(geneStats.INV$CHROM, geneStats.INV$POS, sep=".")
 traitSig.INV <- apply(geneP.INV[,7:13], 2, function(x) length(subset(x, x < 0.05)))
 
 geneP.INV$numSig <- apply(geneP.INV[,7:13], 1, function(x) length(subset(c(x), c(x) < 0.05)))
-write.csv(geneP.INV, "tables_intermediate/GWAS/geneP-INV.csv", row.names=FALSE)
-write.csv(geneOdds.INV, "tables_intermediate/GWAS/geneOdds-INV.csv", row.names=FALSE)
-write.csv(geneStats.INV, "tables_intermediate/GWAS/geneStats-INV.csv", row.names=FALSE)
+write.csv(geneP.INV, "data_out/GWAS/geneP-INV.csv", row.names=FALSE)
+write.csv(geneOdds.INV, "data_out/GWAS/geneOdds-INV.csv", row.names=FALSE)
+write.csv(geneStats.INV, "data_out/GWAS/geneStats-INV.csv", row.names=FALSE)

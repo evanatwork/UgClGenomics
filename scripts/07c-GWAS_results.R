@@ -110,3 +110,14 @@ text(x = chrLab-5, y = -0.01, labels=paste0("chr", 1:14), cex=1, xpd=NA, srt=-45
 #axis(1, at=chrLab[13], "chr13", cex.axis=0.8)
 mtext("position in genome", side=1, line=2)
 dev.off()
+
+
+######################################################
+#Look at all significant survival variants
+######################################################
+geneP.all <-read.csv("data_out/GWAS/180808genePall.csv")
+
+survival <- subset(geneP.all, Survival < 0.05)[,c(1:6, 26, 42:48)] #12
+allSigCP_survival <- subset(allSigCP, gene %in% survival$gene)
+#all seven genes with significant survival associations were already included
+subset(genes, name %in% survival$gene)

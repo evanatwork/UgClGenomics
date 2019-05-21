@@ -75,11 +75,11 @@ some93 <- subset(variable, status=="some93") #3396
 some93other <- subset(variable, status=="some93+other") #1277
 otherST <- subset(variable, status=="otherST") #74354
 
-write.csv(all93, "tables_intermediate/variants/df-allST93_snpsREFvALT.csv", row.names=FALSE)
-write.csv(all93other, "tables_intermediate/variants/df-allST93other_snpsREFvALT.csv", row.names=FALSE)
-write.csv(some93, "tables_intermediate/variants/df-some93_snpsREFvALT.csv", row.names=FALSE)
-write.csv(some93other, "tables_intermediate/variants/df-some93other_snpsREFvALT.csv", row.names=FALSE)
-write.csv(otherST, "tables_intermediate/variants/df-otherST_snpsREFvALT.csv", row.names=FALSE)
+#write.csv(all93, "data_out/variants/df-allST93_snpsREFvALT.csv", row.names=FALSE)
+#write.csv(all93other, "data_out/variants/df-allST93other_snpsREFvALT.csv", row.names=FALSE)
+#write.csv(some93, "data_out/variants/df-some93_snpsREFvALT.csv", row.names=FALSE)
+#write.csv(some93other, "data_out/variants/df-some93other_snpsREFvALT.csv", row.names=FALSE)
+#write.csv(otherST, "data_out/variants/df-otherST_snpsREFvALT.csv", row.names=FALSE)
 
 length(unique(dfall$gene)) #7509
 all93.snps <- subset(dfall, CP %in% all93$CP)
@@ -93,11 +93,11 @@ length(unique(some93other.snps$gene)) #228
 otherST.snps <- subset(dfall, CP %in% otherST$CP)
 length(unique(otherST.snps$gene)) #7246
 
-write.csv(all93.snps, "tables_intermediate/variants/df-allST93_snps.csv", row.names=FALSE)
-write.csv(all93other.snps, "tables_intermediate/variants/df-allST93other_snps.csv", row.names=FALSE)
-write.csv(some93.snps, "tables_intermediate/variants/df-some93_snps.csv", row.names=FALSE)
-write.csv(some93other.snps, "tables_intermediate/variants/df-some93other_snps.csv", row.names=FALSE)
-write.csv(otherST.snps, "tables_intermediate/variants/df-otherST_snps.csv", row.names=FALSE)
+#write.csv(all93.snps, "data_out/variants/df-allST93_snps.csv", row.names=FALSE)
+#write.csv(all93other.snps, "data_out/variants/df-allST93other_snps.csv", row.names=FALSE)
+#write.csv(some93.snps, "data_out/variants/df-some93_snps.csv", row.names=FALSE)
+#write.csv(some93other.snps, "data_out/variants/df-some93other_snps.csv", row.names=FALSE)
+#write.csv(otherST.snps, "data_out/variants/df-otherST_snps.csv", row.names=FALSE)
 
 ################################################################################
 #INDELS
@@ -156,11 +156,11 @@ some93.IND <- subset(variable.IND, status=="some93") #479
 some93other.IND <- subset(variable.IND, status=="some93+other") #453
 otherST.IND <- subset(variable.IND, status=="otherST") #8505
 
-write.csv(all93.IND, "tables_intermediate/variants/df-allST93_indelsREFvALT.csv", row.names=FALSE)
-write.csv(all93other.IND, "tables_intermediate/variants/df-allST93other_indelsREFvALT.csv", row.names=FALSE)
-write.csv(some93.IND, "tables_intermediate/variants/df-some93_indelsREFvALT.csv", row.names=FALSE)
-write.csv(some93other.IND, "tables_intermediate/variants/df-some93other_indelsREFvALT.csv", row.names=FALSE)
-write.csv(otherST.IND, "tables_intermediate/variants/df-otherST_indelsREFvALT.csv", row.names=FALSE)
+#write.csv(all93.IND, "data_out/variants/df-allST93_indelsREFvALT.csv", row.names=FALSE)
+#write.csv(all93other.IND, "data_out/variants/df-allST93other_indelsREFvALT.csv", row.names=FALSE)
+#write.csv(some93.IND, "data_out/variants/df-some93_indelsREFvALT.csv", row.names=FALSE)
+#write.csv(some93other.IND, "data_out/variants/df-some93other_indelsREFvALT.csv", row.names=FALSE)
+#write.csv(otherST.IND, "data_out/variants/df-otherST_indelsREFvALT.csv", row.names=FALSE)
 
 all93.indels <- subset(dfall.IND, CP %in% all93.IND$CP) #12483
 all93other.indels <- subset(dfall.IND, CP %in% all93other.IND$CP) #13904
@@ -168,20 +168,29 @@ some93.indels <- subset(dfall.IND, CP %in% some93.IND$CP) #4122
 some93other.indels <- subset(dfall.IND, CP %in% some93other.IND$CP) #685
 otherST.indels <- subset(dfall.IND, CP %in% otherST.IND$CP) #29970
 
-write.csv(all93.indels, "tables_intermediate/variants/df-allST93_indels.csv", row.names=FALSE)
-write.csv(all93other.indels, "tables_intermediate/variants/df-allST93other_indels.csv", row.names=FALSE)
-write.csv(some93.indels, "tables_intermediate/variants/df-some93_indels.csv", row.names=FALSE)
-write.csv(some93other.indels, "tables_intermediate/variants/df-some93other_indels.csv", row.names=FALSE)
-write.csv(otherST.indels, "tables_intermediate/variants/df-otherST_indels.csv", row.names=FALSE)
+#write.csv(all93.indels, "data_out/variants/df-allST93_indels.csv", row.names=FALSE)
+#write.csv(all93other.indels, "data_out/variants/df-allST93other_indels.csv", row.names=FALSE)
+#write.csv(some93.indels, "data_out/variants/df-some93_indels.csv", row.names=FALSE)
+#write.csv(some93other.indels, "data_out/variants/df-some93other_indels.csv", row.names=FALSE)
+#write.csv(otherST.indels, "data_out/variants/df-otherST_indels.csv", row.names=FALSE)
 
 ######################
 #all variants
 ######################
 allVar <- rbind(dfall, dfall.IND)
-write.csv(allVar, "tables_intermediate/variants-processed/df-allVar.csv", row.names=FALSE)
+#write.csv(allVar, "data_out/variants/df-allVar.csv", row.names=FALSE)
+allVar <- read.csv("data_out/variants/df-allVar.csv", as.is=TRUE)
 
 nrow(allVar)
 length(unique(allVar$gene)) #7561 genes with at least one mutations
+
+sub_genes <- subset(genes, name %in% allVar$gene)
+nrow(subset(sub_genes, description == "hypothetical RNA")) #690
+nrow(subset(sub_genes, description == "hypothetical protein")) #2982
+tRNAs <- sub_genes[grep("-tRNA", sub_genes$description),] #75
+#with descriptions = 7561 - 690 - 2982 = 3889
+#Percent without description = 2982/(2982+3889)
+
 
 table(allVar$effect)
 

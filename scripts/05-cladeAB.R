@@ -1,5 +1,8 @@
 library(here)
 library(Hmisc)
+install.packages("remotes")
+remotes::install_github("dustinfife/fifer")
+library(fifer)
 
 # #Plot variant locations function
 # snpLoc <- function(list, list2 = NA, col1 = "purple", col2 = "orange", col3 = "purple", orient="grid", listOrient="single"){
@@ -244,6 +247,7 @@ ST93B.small$effect <- factor(ST93B.small$effect, levels=c("indel", "nonsynonymou
 
 allEffect <- rbind("all93" = table(all93.small$effect)/length(all93.small[,1]), "ST93A" = table(ST93A.small$effect)/length(ST93A.small[,1]), "ST93B" = table(ST93B.small$effect) /length(ST93B.small[,1]))
 
+
 pdf("manuscript/figures/Figure4B_ST93AB-effectVar.pdf", width=6, height=4)
 par(mar=c(4, 3, 2, 1), oma=c(2, 2, 1, 1))
 m <- barplot(allEffect, beside=TRUE, xaxt="n", yaxt="n", col=c("darkgrey", "purple", "orange"), xaxs = "i", ylim=c(0, 0.8), xlim=c(0, 21), border=NA)
@@ -253,3 +257,6 @@ axis(1, at =m[2,], labels=c("indel", "nonsynonymous", "upstream", "downstream", 
 mtext("fraction of variants", side=2, line=3)
 legend("topleft", legend=c("allST93", "ST93A", "ST93B"), pch=22, col=c("darkgrey", "purple", "orange"), pt.bg =c("darkgrey", "purple", "orange"), cex=0.8, inset=0.05)
 dev.off()
+
+allEffect_tab <- as.table(rbind(table(ST93A.small$effect), table(ST93B.small$effect)))
+chi1 <- chisq.test(allEffect_tab)

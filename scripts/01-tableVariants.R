@@ -188,8 +188,8 @@ sub_genes <- subset(genes, name %in% allVar$gene)
 nrow(subset(sub_genes, description == "hypothetical RNA")) #690
 nrow(subset(sub_genes, description == "hypothetical protein")) #2982
 tRNAs <- sub_genes[grep("-tRNA", sub_genes$description),] #75
-#with descriptions = 7561 - 690 - 2982 = 3889
-#Percent without description = 2982/(2982+3889)
+#with descriptions = 7561 - 2982 - 690 = 3889
+#Percent without description = (2982+690)/(7561) = 49%
 
 
 table(allVar$effect)
@@ -228,13 +228,14 @@ gene.descript  <- subset(genes, description %nin% c("hypothetical protein", "hyp
 ############################
 #FIGURES
 ############################
-pdf("manuscript/figures/Figure1B-180727numVar-genLength.pdf", width=4, height=4)
-plot(gene.descript$length, gene.descript$numVar, xlab="gene length", ylab="number of variants", yaxt="n")
+pdf("manuscript/figures/Figure1B-190522numVar-genLength.pdf", width=4, height=4)
+plot(gene.descript$length, gene.descript$numVar/gene.descript$length, xlab="gene length (bp)", ylab="number of variants/bp", yaxt="n")
 axis(2, las=2)
-abline(lm(gene.descript$numVar~gene.descript$length), col="red")
+abline(lm((gene.descript$numVar/gene.descript$length)~gene.descript$length), col="red")
 dev.off()
 
-cor.test(gene.descript$numVar, gene.descript$length)
+summary(lm((gene.descript$numVar/gene.descript$length)~gene.descript$length))
+cor.test(gene.descript$numVar/gene.descript$length, gene.descript$length)
 #t = 33.001, df = 4254, p-value < 2.2e-16
 #0.4514712
 

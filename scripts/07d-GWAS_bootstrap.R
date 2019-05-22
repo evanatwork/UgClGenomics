@@ -106,12 +106,13 @@ for(i in unique(allSig_allPhen$CP)){
 }
 
 allSig_allPhen$CP==allSig_allPhen$CP
-allSig_allPhen$numExtreme <- numExtreme
+allSig_allPhen$bootstrap_num_extreme <- numExtreme
 
 write.csv(allSig_allPhen, "data_out/GWAS/GWAS_bootstrap.csv")
-allSig_allPhen <- read.csv("data_out/GWAS/GWAS_bootstrap.csv")
+write.csv(allSig_allPhen, "manuscript/tables/TableS7_geneP2-allsig-stats-bootstrap.csv")
 
-allSig_allPhen_remove <- subset(allSig_allPhen, numExtreme > 10)
-table(allSig_allPhen_remove$pheno)
-table(allSig_allPhen_remove$class)
-table(allSig_allPhen$class)
+head(allSig_allPhen)
+low_confidence <- subset(allSig_allPhen, bootstrap_num_extreme >= 25)
+high_confidence <- subset(allSig_allPhen, bootstrap_num_extreme < 25)
+table(low_confidence$effect)/nrow(low_confidence)
+table(high_confidence$effect)/nrow(high_confidence)

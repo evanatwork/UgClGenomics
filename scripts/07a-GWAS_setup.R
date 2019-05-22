@@ -183,7 +183,7 @@ traitSig <- apply(geneP.CSF[,7:25], 2, function(x) length(subset(x, x < 0.05)))
 geneP.CSF$numSig <- apply(geneP.CSF[,7:24], 1, function(x) length(subset(c(x), c(x) < 0.05)))
 names(geneP.CSF)[3:4] <- c("gene", "effect")
 names(geneP.CSF)[30:32] <- c("impact", "class", "AAchange")
-write.csv(geneP.CSF, "data_out/GWAS/geneP-CSF-4.csv", row.names=FALSE)
+write.csv(geneP.CSF, "data_out/GWAS/geneP-CSF.csv", row.names=FALSE)
 write.csv(geneOdds.CSF, "data_out/GWAS/geneOdds-CSF.csv", row.names=FALSE)
 write.csv(pstats.CSF, "data_out/GWAS/geneStats-CSF.csv", row.names=FALSE)
 

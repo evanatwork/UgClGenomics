@@ -63,6 +63,7 @@ some93.all <- rbind(some93.snps, some93other.snps, some93.ind, some93other.ind) 
 ####################
 #Filter variants
 ####################
+table(some93.all$HOM.VAR)
 some93.4 <- subset(some93.all, HOM.VAR > 4 & HOM.VAR < 37) #1410 variants
 
 inCEN <- c()
@@ -110,7 +111,7 @@ for(k in 1:length(some93.eff.CSF[,1])){
 	alleleVarTable <- table(t(temp))
 	alleleVarMin <- min(alleleVarTable)
 	alleleVarMax <- max(alleleVarTable)
-  if(alleleVarMax > c(sum(alleleVarTable)-6) | length(alleleVarTable)==1){
+  if(alleleVarMax > c(sum(alleleVarTable)-4) | length(alleleVarTable)==1){
 			ks <- append(ks, k)
 			nonVar.dCSF <- rbind(nonVar.dCSF, some93.eff.CSF[k,])
 		}
@@ -119,7 +120,7 @@ for(k in 1:length(some93.eff.CSF[,1])){
 nonVar.dCSF <- nonVar.dCSF[-1,]
 var.dCSF <- var.dCSF[-1,]
 
-length(var.dCSF[,1]) #466 variants
+length(var.dCSF[,1]) #541 with  >4
 write.csv(var.dCSF, "data_out/variants/var_dCSF.csv", row.names=FALSE)
 
 ########################
@@ -182,7 +183,7 @@ traitSig <- apply(geneP.CSF[,7:25], 2, function(x) length(subset(x, x < 0.05)))
 geneP.CSF$numSig <- apply(geneP.CSF[,7:24], 1, function(x) length(subset(c(x), c(x) < 0.05)))
 names(geneP.CSF)[3:4] <- c("gene", "effect")
 names(geneP.CSF)[30:32] <- c("impact", "class", "AAchange")
-write.csv(geneP.CSF, "data_out/GWAS/geneP-CSF.csv", row.names=FALSE)
+write.csv(geneP.CSF, "data_out/GWAS/geneP-CSF-4.csv", row.names=FALSE)
 write.csv(geneOdds.CSF, "data_out/GWAS/geneOdds-CSF.csv", row.names=FALSE)
 write.csv(pstats.CSF, "data_out/GWAS/geneStats-CSF.csv", row.names=FALSE)
 
@@ -201,7 +202,7 @@ for(k in 2:length(some93.eff.WBC[,1])){
 	alleleVarTable <- table(t(temp))
 	alleleVarMin <- min(alleleVarTable)
 	alleleVarMax <- max(alleleVarTable)
-  if(alleleVarMax > c(sum(alleleVarTable)-6) | length(alleleVarTable)==1){
+  if(alleleVarMax > c(sum(alleleVarTable)-4) | length(alleleVarTable)==1){
 			ks <- append(ks, k)
 			nonVar.dWBC <- rbind(nonVar.dWBC, some93.eff.WBC[k,])
 		}
@@ -289,11 +290,11 @@ write.csv(pstats.WBC, "data_out/GWAS/geneStats-WBC.csv", row.names=FALSE)
 ##########################
 #invitro
 ##########################
-some93.eff.invitro <- some93.eff[, names(some93.eff) %in% paste0("UgCl", strains$line[2:38])]
+some93.eff.invitro <- some93.eff[, names(some93.eff) %in% paste0("UgCl", strains$line[2:56])]
 some93.eff.invitro <- cbind(some93.eff.invitro, some93.eff[,c(1:12, 51)])
 some93.eff.invitro <- some93.eff.invitro[order(some93.eff.invitro$CP),]
 var.dinvitro <-some93.eff.invitro
-write.csv(var.dinvitro, "data_out/variants/var_dINV.csv", row.names=FALSE)
+write.csv(var.dinvitro, "data_out/variants/var.dinvitro", row.names=FALSE)
 
 nonVar.dINV <- data.frame(some93.eff.invitro[1,])
 var.dINV <- data.frame(some93.eff.invitro[1,])
@@ -303,7 +304,7 @@ for(k in 2:length(some93.eff.invitro[,1])){
 	alleleVarTable <- table(t(temp))
 	alleleVarMin <- min(alleleVarTable)
 	alleleVarMax <- max(alleleVarTable)
-  if(alleleVarMax > c(sum(alleleVarTable)-6) | length(alleleVarTable)==1){
+  if(alleleVarMax > c(sum(alleleVarTable)-4) | length(alleleVarTable)==1){
 			ks <- append(ks, k)
 			nonVar.dINV <- rbind(nonVar.invitro, some93.eff.invitro[k,])
 		}

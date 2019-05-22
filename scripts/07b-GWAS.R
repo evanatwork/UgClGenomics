@@ -105,7 +105,7 @@ for(i in 1:length(geneP.all$gene)){
   else alias[i] <- as.character(subset(genes, name==as.character(geneP.all$gene[i]))$alias)
 }
 geneP.all$alias <- alias
-write.csv(geneP.all, "tables_intermediate/GWAS/180808genePall.csv", row.names=FALSE)
+write.csv(geneP.all, "tables_intermediate/GWAS/190521genePall.csv", row.names=FALSE)
 
 geneP.sig.all <- subset(geneP.all, numSig > 0)
 geneP.sig.2 <- subset(geneP.sig.all, numSig > 1)
@@ -158,7 +158,7 @@ WBC_inVitro.sig.allTraits.1$class <- "b"
 #Gene is not in the all traits set
 WBC_inVitro.sig.unique <- subset(WBC_inVitro.sig, gene %nin% geneP.sig.allTraits$gene)
 WBC_inVitro.sig.unique.2 <- subset(WBC_inVitro.sig.unique, numSig > 1)
-WBC_inVitro.sig.unique.2$class <- "a"
+#WBC_inVitro.sig.unique.2$class <- "a"
 WBC_inVitro.sig.unique.1 <- subset(WBC_inVitro.sig.unique, numSig == 1)
 
 WBC_inVitro.sig.allTraits <- rbind(WBC_inVitro.sig.allTraits.2, WBC_inVitro.sig.allTraits.1, WBC_inVitro.sig.unique.2)
@@ -223,12 +223,17 @@ for(i in unique(geneP.sig.allTraits$gene)){
 	}
 }
 
-allSig_allPhen <- data.frame(gene, chr, pos, class, effect, pheno, oddsProb= unlist(oddsProb), stats= unlist(stats))
+#allSig_allPhen <- data.frame(gene, chr, pos, class, effect, pheno, oddsProb= unlist(oddsProb), stats= unlist(stats))
+allSig_allPhen <- data.frame(gene, chr, pos, class, effect, pheno, stats= unlist(stats))
+
 allSig_allPhen$CP <- paste(allSig_allPhen$chr, allSig_allPhen$pos, sep=".")
 allSig_allPhen <- allSig_allPhen[order(allSig_allPhen$gene),]
-allSig_allPhen <- allSig_allPhen[, c("gene", "chr", "pos", "class", "effect", "pheno", "oddsProb", "stats")]
-names(allSig_allPhen)[7] <- "odds ratio (CI)"
-names(allSig_allPhen)[8] <- "logistic regression"
+#allSig_allPhen <- allSig_allPhen[, c("gene", "chr", "pos", "class", "effect", "pheno", "oddsProb", "stats")]
+allSig_allPhen <- allSig_allPhen[, c("gene", "chr", "pos", "class", "effect", "pheno", "stats")]
+
+#names(allSig_allPhen)[7] <- "odds ratio (CI)"
+#names(allSig_allPhen)[8] <- "logistic regression"
+names(allSig_allPhen)[7] <- "logistic regression"
 #write.csv(allSig_allPhen, "manuscript/tables/TableS7_geneP2-allsig-stats.csv", row.names=FALSE)
 
 #save with each variant on a different row
@@ -265,8 +270,8 @@ for(i in unique(geneP.sig.allTraits$gene)){
 allSig <- data.frame(gene, chr, pos, class, effect, pheno, numPhen)
 allSig$gene <- as.character(allSig$gene)
 allSig$pheno <- as.character(allSig$pheno)
-allSig <- allSig[order(allSig$gene),] #133 positions in 41 genes
-
+allSig <- allSig[order(allSig$gene),] #133 positions in 41 genes # with >4 143 positions in
+#43 genes
 sub <- c()
 gene <-c()
 chr <- c()
@@ -304,7 +309,7 @@ allSig.WBC_inVitro$gene <- as.character(allSig.WBC_inVitro$gene)
 allSig.WBC_inVitro$pheno <- as.character(allSig.WBC_inVitro$pheno)
 
 allSigCP <- rbind(allSig, allSig.WBC_inVitro)
-allSigCP <- allSigCP[order(allSigCP$gene),] #145 positions in 42 genes
+allSigCP <- allSigCP[order(allSigCP$gene),] #148 positions in 43 genes
 
 alias <- c()
 for(i in 1:length(allSigCP$gene)){

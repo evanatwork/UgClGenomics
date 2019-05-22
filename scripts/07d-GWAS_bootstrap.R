@@ -62,7 +62,7 @@ for(i in unique(allSig_allPhen$CP)){
     numFalse.P <- c()
     k <- 0
     pvals <- c()
-    while(k < 200){
+    while(k < 500){
       k <- k+1
       #resp <- sub[15:49]
       if(l %in% names(dCSF)){
@@ -82,8 +82,8 @@ for(i in unique(allSig_allPhen$CP)){
       dat <- subset(dat, !is.na(pred))
       dat <- subset(dat, resp != ".")
       dat$resp <- as.character(dat$resp)
-      dat$resp[dat$resp== as.character(subset(var.dCSF, CP == sub$CP)$REF)] <- 1		#REF
-      dat$resp[dat$resp== as.character(subset(var.dCSF, CP == sub$CP)$ALT)] <- 0		#ALT
+      dat$resp[dat$resp== as.character(subset(var.dWBC, CP == sub$CP)$REF)] <- 1		#REF
+      dat$resp[dat$resp== as.character(subset(var.dWBC, CP == sub$CP)$ALT)] <- 0		#ALT
       dat$pred <- as.numeric(dat$pred)
       dat$resp <- as.numeric(dat$resp)
       dat.real <- dat

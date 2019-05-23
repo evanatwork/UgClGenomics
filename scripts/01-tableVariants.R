@@ -228,11 +228,6 @@ gene.descript  <- subset(genes, description %nin% c("hypothetical protein", "hyp
 ############################
 #FIGURES
 ############################
-pdf("manuscript/figures/Figure1B-190522numVar-genLength.pdf", width=4, height=4)
-plot(gene.descript$length, gene.descript$numVar/gene.descript$length, xlab="gene length (bp)", ylab="number of variants/bp", yaxt="n")
-axis(2, las=2)
-abline(lm((gene.descript$numVar/gene.descript$length)~gene.descript$length), col="red")
-dev.off()
 
 summary(lm((gene.descript$numVar/gene.descript$length)~gene.descript$length))
 cor.test(gene.descript$numVar/gene.descript$length, gene.descript$length)
@@ -248,16 +243,29 @@ allGenes.table <- allGenes.table[order(names(allGenes.table))]
 genes <- genes[order(genes$name),]
 genes$numVar <- allGenes.table
 
-pdf("manuscript/figures/Figure1A-180727numVar-all.pdf", width=6, height=4)
-par(fig=c(0, 1, 0, 1))
-hist(genes.CNAG$numVar, xaxt="n", yaxt="n", ylab="number of genes", xlab="number of variants", breaks=100, ylim=c(0, 1400), main="")
+#pdf("manuscript/figures/Figure1A-180727numVar-all.pdf", width=3, height=4)
+tiff(filename = "manuscript/figures/Figure1A-numVar_numGenes.tiff", width = 3.3, height = 3.3, units = 'in', res = 300, compression = 'lzw', pointsize = 9)
+par(mar=c(1,1,1,1), oma=c(3, 4, 1, 1), fig=c(0, 1, 0, 1), mgp=c(1,0.75,0))
+hist(genes.CNAG$numVar, xaxt="n", yaxt="n", ylab="Number of genes", xlab="Number of variants", breaks=50, ylim=c(0, 2500), main="")
 axis(1, pos=0)
 axis(2, las=2, pos=0)
-par(fig = c(0.3,0.9, 0.3, 0.95), new = T)
-hist(subset(genes.CNAG, numVar > 50)$numVar, yaxt="n", xaxt="n", ylab="", xlab="", breaks=100, main="")
+mtext("Number of genes", side=2, line=2.75, cex=1.1)
+mtext("Number of variants", side=1, line=1.75, cex=1.1)
+par(fig = c(0.3, 0.975, 0.3, 0.975), new = T)
+hist(subset(genes.CNAG, numVar > 50)$numVar, yaxt="n", xaxt="n", ylab="", xlab="", breaks=50, main="")
 axis(1, pos=0)
 axis(2, las=2, pos=50)
 dev.off()
+
+tiff(filename = "manuscript/figures/Figure1B-numVar_geneLength.tiff", width = 3.3, height = 3.3, units = 'in', res = 300, compression = 'lzw', pointsize = 9)
+par(mar=c(1,1,1,1), oma=c(3, 4, 1, 1), fig=c(0, 1, 0, 1), mgp=c(1,0.75,0))
+plot(gene.descript$length, gene.descript$numVar/gene.descript$length, xlab="", ylab="number of variants/bp", yaxt="n")
+axis(2, las=2)
+abline(lm((gene.descript$numVar/gene.descript$length)~gene.descript$length), col="red", lty=2)
+mtext("Number of variants/bp", side=2, line=2.75, cex=1.1)
+mtext("Gene length (bp)", side=1, line=1.75, cex=1.1)
+dev.off()
+
 
 length(subset(genes.CNAG, numVar > 50)$numVar) #435
 
@@ -281,8 +289,9 @@ strains$numVAR <- indels+snps
 ord.numVAR <- strains[order(strains$numVAR),]
 ord.numVAR <- ord.numVAR[c(1:12, 22, 13:21, 23:56),]
 
-pdf("manuscript/figures/Figure1C-180727numSNPs.pdf", width=9.5, height=5)
-par(oma=c(1, 1, 1, 4))
+#pdf("manuscript/figures/Figure1C-180727numSNPs.pdf", width=9.5, height=5)
+tiff(filename = "manuscript/figures/Figure1C-190522numSNPs.tiff", width = 6.3, height = 3.3, units = 'in', res = 300, compression = 'lzw', pointsize = 9)
+par(mar=c(1,1,1,1), oma=c(3, 4, 1, 1), fig=c(0, 1, 0, 1), mgp=c(1,0.75,0))
 t <- barplot(t(cbind(ord.numVAR$numIND, ord.numVAR$numSNP)), yaxt="n", ylim=c(0, 60000))
 axis(2, las=2, pos=-1, cex.axis=0.8)
 text(t-0.9, -2000, ord.numVAR$line, xpd=NA, srt=-45, cex=0.6, pos=4)

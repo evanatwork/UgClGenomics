@@ -5,52 +5,6 @@ remotes::install_github("dustinfife/fifer")
 library(fifer)
 
 # #Plot variant locations function
-# snpLoc <- function(list, list2 = NA, col1 = "purple", col2 = "orange", col3 = "purple", orient="grid", listOrient="single"){
-# 	j <- 0
-# 	k <- 0
-# 	l <- 0
-# 	if(orient=="grid"){
-# 	par(mfrow=c(7, 2), mar=c(1, 1, 1, 1), oma=c(4, 4, 1, 1))
-# 	for(i in 1:14){
-# 		plot(c(1, chrLens[i]), c(1, 1), type="l", xlim=c(0, 2301499), xaxt="n", yaxt="n")
-# 		if(i %in% names(list)){
-# 			j <- j+1
-# 			if(length(list[[j]][,1]) > 0) {
-# 				listTemp0 <- list[[j]]
-# 				if(listOrient=="both") arrows(listTemp0[, "POS"], c(1.3, 0.7), listTemp0[, "POS"], c(1.05, 0.95), length=0.05, col=col1, lwd=1.5)
-# 				else arrows(listTemp0[, "POS"], c(1.3), listTemp0[, "POS"], c(1.05), length=0.05, col=col1, lwd=1.5)
-# 			}
-# 		}
-# 		if(!is.na(list2)){
-# 		  if(i %in% names(list2)){
-# 				k <- k+1
-# 				if(length(list2[[k]][,1]) > 0) {
-# 					listTemp <- list2[[k]]
-# 					if(listOrient=="both") arrows(listTemp[, "POS"], c(1.3, 0.7), listTemp[, "POS"], c(1.05, 0.95), length=0.05, col=col1, lwd=1.5)
-# 					else arrows(listTemp[, "POS"], c(0.7), listTemp[, "POS"], c(0.95), length=0.05, col=col2, lwd=1.5)
-# 		    }
-# 			}
-# 	}
-# 	CENTLO <- subset(centelo, V1==paste("chr", i, sep=""))
-# 		for(m in 1:length(CENTLO[,1])){
-# 			if(CENTLO[m,3]=="centromere"){
-# 				points(c(CENTLO[m, 4],CENTLO[m, 5]), c(1, 1), type="l", col="black", lwd=5)
-# 			}
-# 			if(CENTLO[m,3]=="telomere"){
-# 				points(c(CENTLO[m, 4],CENTLO[m, 5]), c(1, 1), type="l", col="black", lwd=5)
-# 			}
-# 	#		if(centelos[k,3]=="MAT"){
-# 	#			points(c(centelos[k, 4],centelos[k, 5]), c(1, 1), type="l", col="grey", lwd=5)
-# 	#		}
-# 		}
-# 		if(i > 12) axis(1)
-# 		else axis(1, labels=FALSE)
-# 		mtext(paste("chromosome", i), side=3, adj=0.01, cex=0.8)
-# 	}
-# 	mtext("position on chromosome", side=1, outer=TRUE, line=2)
-# 	}
-# }
-
 snpLocLine <- function(list, list2 = NA, col1 = "purple", col2 = "orange", col3 = "purple",  listOrient="single"){
 	j <- 0
 	k <- 0
@@ -61,8 +15,8 @@ snpLocLine <- function(list, list2 = NA, col1 = "purple", col2 = "orange", col3 
 			j <- j+1
 			if(length(list[[j]][,1]) > 0) {
 				listTemp0 <- list[[j]]
-				if(listOrient=="both") arrows(listTemp0[, "POS"], c(1.3, 0.7), listTemp0[, "POS"], c(1.05, 0.95), length=0.05, col=col1, lwd=1.5)
-				else arrows(listTemp0[, "POS"], c(1.3), listTemp0[, "POS"], c(1.05), length=0.05, col=col1, lwd=1.5)
+				if(listOrient=="both") arrows(listTemp0[, "POS"], c(1.3, 0.7), listTemp0[, "POS"], c(1.05, 0.95), length=0.025, col=col1, lwd=1.25)
+				else arrows(listTemp0[, "POS"], c(1.3), listTemp0[, "POS"], c(1.05), length=0.025, col=col1, lwd=1.25)
 			}
 		}
 		if(!is.na(list2)){
@@ -70,28 +24,28 @@ snpLocLine <- function(list, list2 = NA, col1 = "purple", col2 = "orange", col3 
 				k <- k+1
 				if(length(list2[[k]][,1]) > 0) {
 					listTemp <- list2[[k]]
-					if(listOrient=="both") arrows(listTemp[, "POS"], c(1.3, 0.7), listTemp[, "POS"], c(1.05, 0.95), length=0.05, col=col1, lwd=1.5)
-					else arrows(listTemp[, "POS"], c(0.7), listTemp[, "POS"], c(0.95), length=0.05, col=col2, lwd=1.5)
+					if(listOrient=="both") arrows(listTemp[, "POS"], c(1.3, 0.7), listTemp[, "POS"], c(1.05, 0.95), length=0.025, col=col1, lwd=1.25)
+					else arrows(listTemp[, "POS"], c(0.7), listTemp[, "POS"], c(0.95), length=0.025, col=col2, lwd=1.25)
 		    }
 			}
 	}
 	CENTLO <- subset(centelo, V1==paste0("chr", i))
 		for(m in 1:length(CENTLO[,1])){
 			if(CENTLO[m,3]=="centromere"){
-				points(c(CENTLO[m, 4],CENTLO[m, 5]), c(1, 1), type="l", col="black", lwd=5)
+				points(c(CENTLO[m, 4],CENTLO[m, 5]), c(1, 1), type="l", col="grey", lwd=4)
 			}
 			if(CENTLO[m,3]=="telomere"){
-				points(c(CENTLO[m, 4],CENTLO[m, 5]), c(1, 1), type="l", col="black", lwd=5)
+				points(c(CENTLO[m, 4],CENTLO[m, 5]), c(1, 1), type="l", col="grey", lwd=4)
 			}
 	#		if(centelos[k,3]=="MAT"){
 	#			points(c(centelos[k, 4],centelos[k, 5]), c(1, 1), type="l", col="grey", lwd=5)
 	#		}
 		}
-		if(i ==14) axis(1)
+		if(i ==14) axis(1, cex=0.8, at =c(0, 500000, 1000000, 1500000, 2000000), labels=c(0, 500, 1000, 1500, 2000))
 		else axis(1, labels=FALSE)
-		mtext(paste("chromosome", i), side=3, adj=0.01, cex=0.8)
+		mtext(paste("Chr", i), side=3, adj=0.01, cex=0.8)
 	}
-	mtext("position on chromosome", side=1, outer=TRUE, line=2)
+	mtext("Position on chromosome (kb)", side=1, outer=TRUE, line=2)
 }
 
 
@@ -112,16 +66,16 @@ genes$chrom <- paste("chr", genes$chrom, sep="")
 ###########################
 #Read in files
 ###########################
-all93.snps <- read.csv("tables_intermediate/variants/df-allST93_snps.csv") #4681
-all93.indels <- read.csv("tables_intermediate/variants/df-allST93_indels.csv") #429
+all93.snps <- read.csv("data_out/variants/df-allST93_snps.csv") #4681
+all93.indels <- read.csv("data_out/variants/df-allST93_indels.csv") #429
 all93 <- rbind(all93.snps, all93.indels)  #5110
 
 classesTF<- c("character", "integer", rep("logical", 56),  "character", "character")
 columnTypes <- c("character", "integer", "character", "character", "numeric", "integer", "integer", "character", "factor", "factor", "factor", "character", rep("character", 56), "character", "character")
-some93TF <- read.csv("tables_intermediate/variants/df-some93_snpsREFvALT.csv", colClasses=classesTF) #3396
-some93.snps <- read.csv("tables_intermediate/variants/df-some93_snps.csv", colClasses=columnTypes)
-some93TF.ind <- read.csv("tables_intermediate/variants/df-some93_indelsREFvALT.csv", colClasses=classesTF) #479
-some93.ind <- read.csv("tables_intermediate/variants/df-some93_indels.csv", colClasses=columnTypes)
+some93TF <- read.csv("data_out/variants/df-some93_snpsREFvALT.csv", colClasses=classesTF) #3396
+some93.snps <- read.csv("data_out/variants/df-some93_snps.csv", colClasses=columnTypes)
+some93TF.ind <- read.csv("data_out/variants/df-some93_indelsREFvALT.csv", colClasses=classesTF) #479
+some93.ind <- read.csv("data_out/variants/df-some93_indels.csv", colClasses=columnTypes)
 
 ###########################
 #Characterize the whole set
@@ -167,13 +121,18 @@ ST93A.sigALT.var <- subset(some93, CP %in% ST93A.sigALT$CP)
 ST93B.sigALT.var <- subset(some93, CP %in% ST93B.sigALT$CP)
 
 #split into lists for plotting
+ST93A.sigALT.var$CHROM <- factor(ST93A.sigALT.var$CHROM,1:14)
+ST93B.sigALT.var$CHROM <- factor(ST93B.sigALT.var$CHROM,1:14)
+
 ST93A.sigALT.var.ddn <- split(ST93A.sigALT.var, ST93A.sigALT.var$CHROM)
 ST93B.sigALT.var.ddn <- split(ST93B.sigALT.var, ST93B.sigALT.var$CHROM)
 
 table(ST93A.sigALT.var$effect)/60
 table(ST93B.sigALT.var$effect)/37
 
-pdf("manuscript/figures/Figure4A-variantLocationsLine.pdf", width=4, height=7)
+#pdf("manuscript/figures/Figure4A-variantLocationsLine.pdf", width=4, height=7)
+tiff(filename = "manuscript/figures/Figure4A-variantLocationsLine.tiff", width = 2, height = 5, units = 'in', res = 300, compression = 'lzw', pointsize = 9)
+par(mar=c(1,1,1,1), oma=c(3, 4, 1, 1), fig=c(0, 1, 0, 1), mgp=c(1,0.75,0))
 snpLocLine(ST93A.sigALT.var.ddn, ST93B.sigALT.var.ddn)
 dev.off()
 
@@ -199,7 +158,7 @@ for(i in 1:length(ST93AB.sig.var$gene)){
 ST93AB.sig.var$description <- description
 
 ST93AB.sig.var <- ST93AB.sig.var[order(ST93AB.sig.var$gene),]
-write.csv(ST93AB.sig.var, "tables_intermediate/ST93AB/ST93clade-variants.csv", row.names=FALSE)
+write.csv(ST93AB.sig.var, "data_out/ST93AB/ST93clade-variants.csv", row.names=FALSE)
 
 ST93AB.sig.var$effect <- as.character(ST93AB.sig.var$effect)
 
@@ -248,7 +207,10 @@ ST93B.small$effect <- factor(ST93B.small$effect, levels=c("indel", "nonsynonymou
 allEffect <- rbind("all93" = table(all93.small$effect)/length(all93.small[,1]), "ST93A" = table(ST93A.small$effect)/length(ST93A.small[,1]), "ST93B" = table(ST93B.small$effect) /length(ST93B.small[,1]))
 
 
-pdf("manuscript/figures/Figure4B_ST93AB-effectVar.pdf", width=6, height=4)
+#pdf("manuscript/figures/Figure4B_ST93AB-effectVar.pdf", width=6, height=4)
+tiff(filename = "manuscript/figures/Figure4B_ST93AB-effectVar.tiff", width = 5, height = 2.5, units = 'in', res = 300, compression = 'lzw', pointsize = 9)
+par(mar=c(1,1,1,1), oma=c(3, 4, 1, 1), fig=c(0, 1, 0, 1), mgp=c(1,0.75,0))
+
 par(mar=c(4, 3, 2, 1), oma=c(2, 2, 1, 1))
 m <- barplot(allEffect, beside=TRUE, xaxt="n", yaxt="n", col=c("darkgrey", "purple", "orange"), xaxs = "i", ylim=c(0, 0.8), xlim=c(0, 21), border=NA)
 box()

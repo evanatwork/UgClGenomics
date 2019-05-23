@@ -4,21 +4,21 @@
 "CNAG_00095","chr1",262739,266546,3807,"null","hypothetical protein CNAG_00095",5,0,9,14
 "CNAG_00164","chr1",447026,448723,1697,"null","hypothetical protein CNAG_00164",0,24,1,25
 "CNAG_00664","chr1",1723252,1725606,2354,"null","hypothetical protein CNAG_00664",19,0,9,28
+"CNAG_05245","chr4",829807,830546,739,"null","hypothetical protein CNAG_05245",0,20,0,20
+"CNAG_05247","chr4",832949,834336,1387,"SLC1","lysophosphatidate acyltransferase",1,6,4,11
+"CNAG_05248","chr4",834753,837513,2760,"null","clathrin binding protein",3,0,10,13
+"CNAG_07420","chr5",418428,419470,1042,"null","hypothetical protein CNAG_07420",0,10,1,11
+"CNAG_02089","chr6",1227443,1229691,2248,"null","hypothetical protein CNAG_02089",0,27,0,27
+"CNAG_02087","chr6",1232584,1234447,1863,"null","acyl-CoA-dependent ceramide synthase",2,12,0,14
+"CNAG_07651","chr6",1416143,1418201,2058,"null","DEAD-box ATP-dependent RNA helicase 26",3,5,5,13
+"CNAG_05903","chr7",1170289,1171602,1313,"null","hypothetical protein CNAG_05903",3,15,2,20
+"CNAG_05910","chr7",1189418,1193699,4281,"null","hypothetical protein CNAG_05910",4,4,5,13
+"CNAG_03229","chr8",395211,396697,1486,"YOX101","specific transcriptional repressor",4,7,3,14
+"CNAG_04292","chr9",495878,496990,1112,"null","hypothetical protein CNAG_04292",0,8,3,11
+"CNAG_04528","chr9",1095325,1098629,3304,"null","hypothetical protein CNAG_04528",8,0,4,12
 "CNAG_04870","chr10",150964,153778,2814,"null","hypothetical protein CNAG_04870",7,3,3,13
 "CNAG_01717","chr11",697418,698958,1540,"null","cell differentiation protein rcd1",1,11,3,15
 "CNAG_06175","chr12",520646,524049,3403,"null","26S proteasome regulatory subunit N2",0,10,1,11
 "CNAG_06230","chr12",688602,690621,2019,"null","hypothetical protein CNAG_06230",1,10,0,11
 "CNAG_05375","chr14",133828,135128,1300,"null","hypothetical protein CNAG_05375",1,10,2,13
 "CNAG_05452","chr14",346448,349039,2591,"null","hypothetical protein CNAG_05452",1,10,1,12
-"CNAG_05245","chr4",829807,830546,739,"null","hypothetical protein CNAG_05245",0,20,0,20
-"CNAG_05247","chr4",832949,834336,1387,"SLC1","lysophosphatidate acyltransferase",1,6,4,11
-"CNAG_05248","chr4",834753,837513,2760,"null","clathrin binding protein",2,0,10,12
-"CNAG_07420","chr5",418428,419470,1042,"null","hypothetical protein CNAG_07420",0,10,1,11
-"CNAG_02089","chr6",1227443,1229691,2248,"null","hypothetical protein CNAG_02089",0,27,0,27
-"CNAG_02087","chr6",1232584,1234447,1863,"null","acyl-CoA-dependent ceramide synthase",2,12,0,14
-"CNAG_07651","chr6",1416143,1418201,2058,"null","DEAD-box ATP-dependent RNA helicase 26",3,5,5,13
-"CNAG_05903","chr7",1170289,1171602,1313,"null","hypothetical protein CNAG_05903",2,15,2,19
-"CNAG_05910","chr7",1189418,1193699,4281,"null","hypothetical protein CNAG_05910",3,4,5,12
-"CNAG_03229","chr8",395211,396697,1486,"YOX101","specific transcriptional repressor",4,7,3,14
-"CNAG_04292","chr9",495878,496990,1112,"null","hypothetical protein CNAG_04292",0,8,3,11
-"CNAG_04528","chr9",1095325,1098629,3304,"null","hypothetical protein CNAG_04528",8,0,4,12

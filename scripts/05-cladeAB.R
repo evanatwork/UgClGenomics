@@ -158,7 +158,7 @@ for(i in 1:length(ST93AB.sig.var$gene)){
 ST93AB.sig.var$description <- description
 
 ST93AB.sig.var <- ST93AB.sig.var[order(ST93AB.sig.var$gene),]
-write.csv(ST93AB.sig.var, "data_out/ST93AB/ST93clade-variants.csv", row.names=FALSE)
+#write.csv(ST93AB.sig.var, "data_out/ST93AB/ST93clade-variants.csv", row.names=FALSE)
 
 ST93AB.sig.var$effect <- as.character(ST93AB.sig.var$effect)
 
@@ -170,7 +170,7 @@ ST93AB.sig.var$effect[ST93AB.sig.var$effect %in% c("SYNONYMOUS_CODING", "INTERGE
 ST93AB.sig.var$effect <- factor(ST93AB.sig.var$effect, levels=c("indel", "nonsynonymous", "upstream", "downstream", "synonymous"))
 
 ST93AB.sig.var.effect <- subset(ST93AB.sig.var, effect %in% c("nonsynonymous", "indel"))
-write.csv(ST93AB.sig.var.effect, "manuscript/tables/TableS3_ST93clade-variants-effect.csv", row.names=FALSE)
+#write.csv(ST93AB.sig.var.effect, "manuscript/tables/TableS3_ST93clade-variants-effect.csv", row.names=FALSE)
 
 ##################################################
 #barplots for effect type
@@ -208,14 +208,13 @@ allEffect <- rbind("all93" = table(all93.small$effect)/length(all93.small[,1]), 
 
 
 #pdf("manuscript/figures/Figure4B_ST93AB-effectVar.pdf", width=6, height=4)
-tiff(filename = "manuscript/figures/Figure4B_ST93AB-effectVar.tiff", width = 5, height = 2.5, units = 'in', res = 300, compression = 'lzw', pointsize = 9)
-par(mar=c(1,1,1,1), oma=c(3, 4, 1, 1), fig=c(0, 1, 0, 1), mgp=c(1,0.75,0))
-
-par(mar=c(4, 3, 2, 1), oma=c(2, 2, 1, 1))
+tiff(filename = "manuscript/figures/Figure4B_ST93AB-effectVar.tiff", width = 4, height = 2.5, units = 'in', res = 300, compression = 'lzw', pointsize = 9)
+par(mar=c(1,1,1,1), oma=c(3, 4, 1, 1), fig=c(0, 1, 0, 1), mgp=c(1,0.5,0))
+#par(mar=c(4, 3, 2, 1), oma=c(2, 2, 1, 1))
 m <- barplot(allEffect, beside=TRUE, xaxt="n", yaxt="n", col=c("darkgrey", "purple", "orange"), xaxs = "i", ylim=c(0, 0.8), xlim=c(0, 21), border=NA)
 box()
 axis(2, las=2, pos=0)
-axis(1, at =m[2,], labels=c("indel", "nonsynonymous", "upstream", "downstream", "synonymous"), pos=0, outer=TRUE, cex.axis=0.7)
+axis(1, at =m[2,], labels=c("indel", "nonsynonymous", "upstream", "downstream", "synonymous"), pos=0, outer=TRUE, cex.axis=0.9)
 mtext("fraction of variants", side=2, line=3)
 legend("topleft", legend=c("allST93", "ST93A", "ST93B"), pch=22, col=c("darkgrey", "purple", "orange"), pt.bg =c("darkgrey", "purple", "orange"), cex=0.8, inset=0.05)
 dev.off()

@@ -112,6 +112,8 @@ all93.named.df$Freq <- all93.named.df$freq.up + all93.named.df$freq.gene + all93
 #Add frequencies of different types into master dataframe
 ##############################################################
 all93_wFreq <- all93.named.df[, c("name", "chrom", "chromStart", "chromEnd", "length", "alias", "description", "freq.gene", "freq.up", "freq.syn", freq.gene = "Freq")]
+all93_wFreq$chrom <- factor(all93_wFreq$chrom, levels=paste0("chr", 1:14))
+
 
 all93_wFreq <- all93_wFreq[order(all93_wFreq$chrom, all93_wFreq$chromStart),] #put back into position order
 all93_wFreq_high <-  subset(all93_wFreq, all93_wFreq$Freq > 10)
@@ -122,14 +124,17 @@ numGenesChr <- unlist(lapply(numGenesChr.ddn, function(x) length(x[,1])))
 numGenesChrCS <- cumsum(numGenesChr)
 
 
-pdf("manuscript/figures/Figure3_ST93-numVar-gene.pdf", width=12, height=4)
+#pdf("manuscript/figures/Figure3_ST93-numVar-gene.pdf", width=12, height=4)
+tiff(filename = "manuscript/figures/Figure3_ST93-numVar-gene.tiff", width = 5, height = 2.5, units = 'in', res = 300, compression = 'lzw', pointsize = 9)
+par(mar=c(1,1,1,1), oma=c(3, 4, 1, 1), fig=c(0, 1, 0, 1), mgp=c(1,0.75,0))
 plot(seq_along(all93_wFreq[,1]), all93_wFreq$Freq, col="black", xaxt="n", ylim=c(0, 50), yaxt="n", xlab="", ylab="Number of variants")
 axis.break(axis=2,breakpos=45,pos=NA,bgcol="white",breakcol="black",  style="slash",brw=0.02)
 points(22, 50)
 axis(2, las=2, at=c(0, 10, 20, 30, 40, 49), labels=c(0, 10, 20, 30, 40,  90))
 axis(1, at= numGenesChrCS, labels=FALSE)
-text(c(numGenesChr[1]/2, numGenesChr[2]/2+numGenesChrCS[1], numGenesChr[3]/2+numGenesChrCS[2],  numGenesChr[4]/2+numGenesChrCS[3], numGenesChr[5]/2+numGenesChrCS[4], numGenesChr[6]/2+numGenesChrCS[5], numGenesChr[7]/2+numGenesChrCS[6], numGenesChr[8]/2+numGenesChrCS[7], numGenesChr[9]/2+numGenesChrCS[8], numGenesChr[10]/2+numGenesChrCS[9], numGenesChr[11]/2+numGenesChrCS[10], numGenesChr[12]/2+numGenesChrCS[11], numGenesChr[13]/2+numGenesChrCS[12], numGenesChr[14]/2+numGenesChrCS[13]), -5, c(paste0("chr", 1:14)), xpd=NA, cex=0.7)
-mtext("Position in genome", side=1, line=2)
+text(c(numGenesChr[1]/2, numGenesChr[2]/2+numGenesChrCS[1], numGenesChr[3]/2+numGenesChrCS[2],  numGenesChr[4]/2+numGenesChrCS[3], numGenesChr[5]/2+numGenesChrCS[4], numGenesChr[6]/2+numGenesChrCS[5], numGenesChr[7]/2+numGenesChrCS[6], numGenesChr[8]/2+numGenesChrCS[7], numGenesChr[9]/2+numGenesChrCS[8], numGenesChr[10]/2+numGenesChrCS[9], numGenesChr[11]/2+numGenesChrCS[10], numGenesChr[12]/2+numGenesChrCS[11], numGenesChr[13]/2+numGenesChrCS[12], numGenesChr[14]/2+numGenesChrCS[13]), -5, c(1:14), xpd=NA, cex=0.7)
+mtext("Position in genome (chromosome)", side=1, line=2)
+mtext("Number of variants", side=2, line=2.5)
 dev.off()
 
 ########################################################################

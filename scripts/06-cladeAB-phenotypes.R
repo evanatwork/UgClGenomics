@@ -18,7 +18,7 @@ genes$chrom <- paste("chr", genes$chrom, sep="")
 ###########################
 #Read in genotype files
 ###########################
-ST93AB.sig <-read.csv("tables_intermediate/ST93AB/ST93clade-variants.csv")
+ST93AB.sig <-read.csv("data_out/ST93AB/ST93clade-variants.csv")
 
 ###########################
 #Read in phenotype files
@@ -140,3 +140,9 @@ for(l in invitrocols){
   else axis(1, labels=FALSE, at=c(1, 2))
  }
   dev.off()
+
+#survival
+StrainsAB <- subset(strains, arm == "COAT" & ST93 %in% c("A", "B"))
+StrainsAB$ST93 <- factor(StrainsAB$ST93)
+StrainsAB$surv.code <- factor(StrainsAB$surv.code)
+fisher.test(table(as.factor(StrainsAB$ST93), as.factor(StrainsAB$surv.code))) #p-value = 0.18, odds ratio = 0.33

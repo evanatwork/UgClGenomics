@@ -15,11 +15,11 @@ allVar.table <- table(allVar$SNPEFF_GENE_NAME)
 ######################################################
 #Read in variants files (i.e., the possible ST93 variants)
 ######################################################
-var93.dCSF <- read.csv("tables_intermediate/variants/var_dCSF.csv")
+var93.dCSF <- read.csv("data_out/variants/var_dCSF.csv")
 var93.dCSF$CP <- paste(var93.dCSF$CHROM, var93.dCSF$POS, sep=".")
 var93.dCSF$gene <- as.character(var93.dCSF$gene)
 
-var93.dWBC <- read.csv("tables_intermediate/variants/var_dWBC.csv")
+var93.dWBC <- read.csv("data_out/variants/var_dWBC.csv")
 var93.dWBC$CP <- paste(var93.dWBC$CHROM, var93.dWBC$POS, sep=".")
 var93.dWBC$gene <- as.character(var93.dWBC$gene)
 
@@ -97,18 +97,20 @@ chrLab <- chrLab[-15]
 
 df_genes$ST93sig_col <- ifelse(df_genes$ST93sig==0, "white", "red")
 
-pdf("manuscript/figures/Figure5_sigVar-relativeFreq-all-poten-sig.pdf", width=10, height=4.5)
-par(mar=c(3, 5, 1, 1))
-plot(seq_along(df_genes$allVar), df_genes$allVar/sum(df_genes$allVar), type="l", lwd=3, ylim=c(0, 0.12), xaxt="n", yaxt="n", xlab="position in genome", ylab="")
-mtext("relative frequency\n (number of variants/gene)", side=2, line=3)
+#pdf("manuscript/figures/Figure5_sigVar-relativeFreq-all-poten-sig.pdf", width=10, height=4.5)
+tiff(filename = "manuscript/figures/Figure5_sigVar-relativeFreq-all-poten-sig.tiff", width = 6, height = 3.5, units = 'in', res = 300, compression = 'lzw', pointsize = 9)
+par(mar=c(1,1,1,1), oma=c(3, 6, 1, 1), fig=c(0, 1, 0, 1), mgp=c(1,0.75,0))
+plot(seq_along(df_genes$allVar), df_genes$allVar/sum(df_genes$allVar), type="l", lwd=3, ylim=c(0, 0.12), xaxt="n", yaxt="n", xlab="", ylab="")
+mtext("Relative frequency\n (number of variants/gene)", side=2, line=3)
 axis(2, las=2)
 axis(1, at = chrBreaks, labels=FALSE)
 points(seq_along(df_genes$allVar), df_genes$ST93var/sum(df_genes$ST93var), type="l", lwd=3, col="grey")
 points(seq_along(df_genes$allVar), df_genes$ST93sig/sum(df_genes$ST93sig), type="p", col=df_genes$ST93sig_col, pch=19)
 legend("topleft", lty=1, col=c("black", "grey", "red"), legend=c("all sequenced variants", "potentially significant", "significant"), bg="white", lwd=c(3, 2, 1))
-text(x = chrLab-5, y = -0.01, labels=paste0("chr", 1:14), cex=1, xpd=NA, srt=-45, pos=4)
+#text(x = chrLab-5, y = -0.01, labels=1:14, cex=1, xpd=NA)
+text(x = chrLab, y = -0.01, labels=1:14, cex=1, xpd=NA)
 #axis(1, at=chrLab[13], "chr13", cex.axis=0.8)
-mtext("position in genome", side=1, line=2)
+mtext("Position in genome (chromosome)", side=1, line=2)
 dev.off()
 
 

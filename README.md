@@ -9,22 +9,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Repository for: Identification of Pathogen Genomic Differences That Impact Human Immune Response and Disease during Cryptococcus neoformans Infection
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Citation: Gerstein AC, Jackson KM, McDonald TR, Wang Y, Lueck BD, Bohjanen S, Smith KD, Akampurira A, Meya DB, Xue C, Boulware DR, Nielsen K. 2019. Identification of pathogen genomic differences that impact human immune response and disease during Cryptococcus neoformans infection. mBio 10: e01440-19. 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+(web)[https://doi.org/10.1128/mBio.01440-19]

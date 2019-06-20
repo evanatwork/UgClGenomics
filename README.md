@@ -13,4 +13,4 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Citation: Gerstein AC, Jackson KM, McDonald TR, Wang Y, Lueck BD, Bohjanen S, Smith KD, Akampurira A, Meya DB, Xue C, Boulware DR, Nielsen K. 2019. Identification of pathogen genomic differences that impact human immune response and disease during Cryptococcus neoformans infection. mBio 10: e01440-19. 
 
-(web)[https://doi.org/10.1128/mBio.01440-19]
+https://doi.org/10.1128/mBio.01440-19

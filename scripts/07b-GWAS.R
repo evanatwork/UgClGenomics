@@ -105,7 +105,7 @@ for(i in 1:length(geneP.all$gene)){
   else alias[i] <- as.character(subset(genes, name==as.character(geneP.all$gene[i]))$alias)
 }
 geneP.all$alias <- alias
-write.csv(geneP.all, "tables_intermediate/GWAS/190521genePall.csv", row.names=FALSE)
+write.csv(geneP.all, "data_out/GWAS/190521genePall.csv", row.names=FALSE)
 
 geneP.sig.all <- subset(geneP.all, numSig > 0)
 geneP.sig.2 <- subset(geneP.sig.all, numSig > 1)

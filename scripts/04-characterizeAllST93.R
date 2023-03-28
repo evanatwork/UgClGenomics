@@ -65,8 +65,8 @@ length(unique(allSeq$gene)) #7500
 #read in data
 columnTypes <- c("character", "integer", "character", "character", "numeric", "integer", "integer", "character", "factor", "factor", "factor", "character", rep("character", 56), "character", "character")
 
-all93.snps <- read.csv("tables_intermediate/variants/df-allST93_snps.csv", colClasses=columnTypes) #4681
-all93.indels <- read.csv("tables_intermediate/variants/df-allST93_indels.csv", colClasses=columnTypes) #429
+all93.snps <- read.csv("data_out/variants/df-allST93_snps.csv", colClasses=columnTypes) #4681
+all93.indels <- read.csv("data_out/variants/df-allST93_indels.csv", colClasses=columnTypes) #429
 
 #join SNPs and INDELS
 table(all93.snps$gene %in% genes$name) #4353 true, 328 false

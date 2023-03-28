@@ -55,9 +55,9 @@ df.sub <- na.omit(df) #29 lines remain
 ###########################
 #Read in variant files
 ###########################
-var.dCSF <- read.csv("tables_intermediate/variants/var_dCSF.csv")
+var.dCSF <- read.csv("data_out/variants/var_dCSF.csv")
 var.dCSF$CP <- paste(var.dCSF$CHROM, var.dCSF$POS, sep=".")
-var.dWBC <- read.csv("tables_intermediate/variants/var_dWBC.csv")
+var.dWBC <- read.csv("data_out/variants/var_dWBC.csv")
 var.dWBC$CP <- paste(var.dWBC$CHROM, var.dWBC$POS, sep=".")
 
 ###########################
@@ -73,7 +73,7 @@ biplot(prin_comp, scale = 1, pc.biplot=TRUE)
 
 #x = the value of the rotated data (the centred (and scaled if requested) data multiplied by the rotation matrix) is returned. Hence, cov(x) is the diagonal matrix diag(sdev^2)
 PCAvar <-data.frame(df.sub[,1:4], prin_comp$x)
-write.csv(PCAvar, "tables_intermediate/PCA/180709PCAloadings.csv", row.names=FALSE)
+write.csv(PCAvar, "data_out/PCA/180709PCAloadings.csv", row.names=FALSE)
 
 PCAvar$ST93 <- factor(PCAvar$ST93, levels=c("D", "C", "A", "B"))
 

@@ -13,33 +13,33 @@ genes$length <- genes$chromEnd - genes$chromStart
 #Read SNP tables
 ##########################
 classes<- c("character", "integer", rep("logical", 56),  "character", "character")
-all93.TF <- read.csv("tables_intermediate/variants/df-allST93_snpsREFvALT.csv", colClasses=classes)
-all93other.TF <- read.csv("tables_intermediate/variants/df-allST93other_snpsREFvALT.csv", colClasses=classes)
-some93.TF <- read.csv("tables_intermediate/variants/df-some93_snpsREFvALT.csv", colClasses=classes)
-some93other.TF <- read.csv("tables_intermediate/variants/df-some93other_snpsREFvALT.csv", colClasses=classes)
-otherST.TF <- read.csv( "tables_intermediate/variants/df-some93other_snpsREFvALT.csv", colClasses=classes)
+all93.TF <- read.csv("data_out/variants/df-allST93_snpsREFvALT.csv", colClasses=classes)
+all93other.TF <- read.csv("data_out/variants/df-allST93other_snpsREFvALT.csv", colClasses=classes)
+some93.TF <- read.csv("data_out/variants/df-some93_snpsREFvALT.csv", colClasses=classes)
+some93other.TF <- read.csv("data_out/variants/df-some93other_snpsREFvALT.csv", colClasses=classes)
+otherST.TF <- read.csv( "data_out/variants/df-some93other_snpsREFvALT.csv", colClasses=classes)
 
 columnTypes <- c("character", "integer", "character", "character", "numeric", "integer", "integer", "character", "factor", "factor", "factor", "character", rep("character", 56), "character", "character")
-all93 <- read.csv("tables_intermediate/variants/df-allST93_snps.csv", colClasses=columnTypes)
-all93other <- read.csv("tables_intermediate/variants/df-allST93other_snps.csv", colClasses=columnTypes)
-some93 <- read.csv("tables_intermediate/variants/df-some93_snps.csv", colClasses=columnTypes)
-some93other <- read.csv("tables_intermediate/variants/df-some93other_snps.csv", colClasses=columnTypes)
-otherST <- read.csv( "tables_intermediate/variants/df-some93other_snps.csv", colClasses=columnTypes)
+all93 <- read.csv("data_out/variants/df-allST93_snps.csv", colClasses=columnTypes)
+all93other <- read.csv("data_out/variants/df-allST93other_snps.csv", colClasses=columnTypes)
+some93 <- read.csv("data_out/variants/df-some93_snps.csv", colClasses=columnTypes)
+some93other <- read.csv("data_out/variants/df-some93other_snps.csv", colClasses=columnTypes)
+otherST <- read.csv( "data_out/variants/df-some93other_snps.csv", colClasses=columnTypes)
 
 ##########################
 #Read IND tables
 ##########################
-all93.TF.IND <- read.csv("tables_intermediate/variants/df-allST93_indelsREFvALT.csv", colClasses=classes)
-all93other.TF.IND <- read.csv("tables_intermediate/variants/df-allST93other_indelsREFvALT.csv", colClasses=classes)
-some93.TF.IND <- read.csv("tables_intermediate/variants/df-some93_indelsREFvALT.csv", colClasses=classes)
-some93other.TF.IND <- read.csv("tables_intermediate/variants/df-some93other_indelsREFvALT.csv", colClasses=classes)
-otherST.TF.IND <- read.csv( "tables_intermediate/variants/df-some93other_indelsREFvALT.csv", colClasses=classes)
+all93.TF.IND <- read.csv("data_out/variants/df-allST93_indelsREFvALT.csv", colClasses=classes)
+all93other.TF.IND <- read.csv("data_out/variants/df-allST93other_indelsREFvALT.csv", colClasses=classes)
+some93.TF.IND <- read.csv("data_out/variants/df-some93_indelsREFvALT.csv", colClasses=classes)
+some93other.TF.IND <- read.csv("data_out/variants/df-some93other_indelsREFvALT.csv", colClasses=classes)
+otherST.TF.IND <- read.csv( "data_out/variants/df-some93other_indelsREFvALT.csv", colClasses=classes)
 
-all93.IND <- read.csv("tables_intermediate/variants/df-allST93_indels.csv", colClasses=columnTypes)
-all93other.IND <- read.csv("tables_intermediate/variants/df-allST93other_indels.csv", colClasses=columnTypes)
-some93.IND <- read.csv("tables_intermediate/variants/df-some93_indels.csv", colClasses=columnTypes)
-some93other.IND <- read.csv("tables_intermediate/variants/df-some93other_indels.csv", colClasses=columnTypes)
-otherST.IND <- read.csv( "tables_intermediate/variants/df-some93other_indels.csv", colClasses=columnTypes)
+all93.IND <- read.csv("data_out/variants/df-allST93_indels.csv", colClasses=columnTypes)
+all93other.IND <- read.csv("data_out/variants/df-allST93other_indels.csv", colClasses=columnTypes)
+some93.IND <- read.csv("data_out/variants/df-some93_indels.csv", colClasses=columnTypes)
+some93other.IND <- read.csv("data_out/variants/df-some93other_indels.csv", colClasses=columnTypes)
+otherST.IND <- read.csv( "data_out/variants/df-some93other_indels.csv", colClasses=columnTypes)
 
 
 #######################################

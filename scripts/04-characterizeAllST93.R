@@ -145,6 +145,7 @@ all93.isna <- subset(all93.unnamed_genes, is.na(gene)) #138
 all93.rna <- subset(all93.unnamed_genes, !is.na(gene)) #219
 
 all93.rna.ddn <- split(all93.rna, all93.rna$gene) #141
+all93.unnamed_genes.ddn <- split(all93.unnamed_genes, all93.unnamed_genes$gene)
 
 names <- c()
 freq.gene <- c()

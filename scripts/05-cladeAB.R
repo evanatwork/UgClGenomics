@@ -158,7 +158,7 @@ for(i in 1:length(ST93AB.sig.var$gene)){
 ST93AB.sig.var$description <- description
 
 ST93AB.sig.var <- ST93AB.sig.var[order(ST93AB.sig.var$gene),]
-#write.csv(ST93AB.sig.var, "data_out/ST93AB/ST93clade-variants.csv", row.names=FALSE)
+write.csv(ST93AB.sig.var, "data_out/ST93AB/ST93clade-variants.csv", row.names=FALSE)
 
 ST93AB.sig.var$effect <- as.character(ST93AB.sig.var$effect)
 
@@ -170,7 +170,7 @@ ST93AB.sig.var$effect[ST93AB.sig.var$effect %in% c("SYNONYMOUS_CODING", "INTERGE
 ST93AB.sig.var$effect <- factor(ST93AB.sig.var$effect, levels=c("indel", "nonsynonymous", "upstream", "downstream", "synonymous"))
 
 ST93AB.sig.var.effect <- subset(ST93AB.sig.var, effect %in% c("nonsynonymous", "indel"))
-#write.csv(ST93AB.sig.var.effect, "manuscript/tables/TableS3_ST93clade-variants-effect.csv", row.names=FALSE)
+write.csv(ST93AB.sig.var.effect, "manuscript/tables/TableS3_ST93clade-variants-effect.csv", row.names=FALSE)
 
 ##################################################
 #barplots for effect type

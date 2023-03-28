@@ -1,7 +1,14 @@
 library(here)
 library(Hmisc)
-install.packages("remotes")
-remotes::install_github("dustinfife/fifer")
+library(remotes)
+if (system.file(package="flexplot") == "") {
+  library(lme4)
+  remotes::install_github("dustinfife/flexplot")
+}
+if (system.file(package="fifer") == "") {
+  library(mice)
+  remotes::install_github("dustinfife/fifer")
+}
 library(fifer)
 
 # #Plot variant locations function

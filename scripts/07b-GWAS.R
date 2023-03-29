@@ -234,7 +234,7 @@ allSig_allPhen <- allSig_allPhen[, c("gene", "chr", "pos", "class", "effect", "p
 #names(allSig_allPhen)[7] <- "odds ratio (CI)"
 #names(allSig_allPhen)[8] <- "logistic regression"
 names(allSig_allPhen)[7] <- "logistic regression"
-#write.csv(allSig_allPhen, "manuscript/tables/TableS7_geneP2-allsig-stats.csv", row.names=FALSE)
+write.csv(allSig_allPhen, "manuscript/tables/TableS7_geneP2-allsig-stats.csv", row.names=FALSE)
 
 #save with each variant on a different row
 sub <- c()

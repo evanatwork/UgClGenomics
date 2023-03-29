@@ -12,7 +12,7 @@ if (system.file(package="fifer") == "") {
 library(fifer)
 
 # #Plot variant locations function
-snpLocLine <- function(list, list2, col1 = "purple", col2 = "orange", col3 = "purple",  listOrient="single"){
+snpLocLine <- function(list, list2 = NULL, col1 = "purple", col2 = "orange", col3 = "purple",  listOrient="single"){
 	j <- 0
 	k <- 0
 	par(mfrow=c(14, 1), mar=c(0.5, 1, 1, 1), oma=c(4, 1, 1, 1))
@@ -26,7 +26,7 @@ snpLocLine <- function(list, list2, col1 = "purple", col2 = "orange", col3 = "pu
 				else arrows(listTemp0[, "POS"], c(1.3), listTemp0[, "POS"], c(1.05), length=0.025, col=col1, lwd=1.25)
 			}
 		}
-		if(!missing(list2)){
+		if(!is.null(list2)){
 		  if(i %in% names(list2)){
 				k <- k+1
 				if(length(list2[[k]][,1]) > 0) {

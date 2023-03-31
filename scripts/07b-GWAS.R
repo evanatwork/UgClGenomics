@@ -151,7 +151,9 @@ WBC_inVitro.sig <- subset(WBC_inVitro.P, numSig > 0)
 #Gene is already in the all traits set
 WBC_inVitro.sig.allTraits <- subset(WBC_inVitro.sig, gene %in% geneP.sig.allTraits$gene)
 WBC_inVitro.sig.allTraits.2 <-  subset(WBC_inVitro.sig.allTraits, numSig > 1)
-WBC_inVitro.sig.allTraits.2$class <- c("ab")
+if(nrow(WBC_inVitro.sig.allTraits.2) > 0 ) {
+  WBC_inVitro.sig.allTraits.2$class <- c("ab")
+}
 WBC_inVitro.sig.allTraits.1 <-  subset(WBC_inVitro.sig.allTraits, numSig ==1)
 WBC_inVitro.sig.allTraits.1$class <- "b"
 
@@ -313,8 +315,12 @@ allSigCP <- allSigCP[order(allSigCP$gene),] #148 positions in 43 genes
 
 alias <- c()
 for(i in 1:length(allSigCP$gene)){
-  if(is.na(as.character(allSigCP$gene[i]))) alias[i] <- "null"
-  else alias[i] <- as.character(subset(genes, name==as.character(allSigCP$gene[i]))$alias)
+  if(is.na(as.character(allSigCP$gene[i]))
+     | nrow(subset(genes, name==as.character(allSigCP$gene[i]))) == 0) {
+    alias[i] <- "null"
+  } else {
+    alias[i] <- as.character(subset(genes, name==as.character(allSigCP$gene[i]))$alias)
+  }
 }
 allSigCP$alias <- alias
 allSigCP$numSig <- allSigCP$numSigSum

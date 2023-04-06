@@ -1,11 +1,18 @@
 library(here)
 library(Hmisc)
-install.packages("remotes")
-remotes::install_github("dustinfife/fifer")
+library(remotes)
+if (system.file(package="flexplot") == "") {
+  library(lme4)
+  remotes::install_github("dustinfife/flexplot")
+}
+if (system.file(package="fifer") == "") {
+  library(mice)
+  remotes::install_github("dustinfife/fifer")
+}
 library(fifer)
 
 # #Plot variant locations function
-snpLocLine <- function(list, list2 = NA, col1 = "purple", col2 = "orange", col3 = "purple",  listOrient="single"){
+snpLocLine <- function(list, list2 = NULL, col1 = "purple", col2 = "orange", col3 = "purple",  listOrient="single"){
 	j <- 0
 	k <- 0
 	par(mfrow=c(14, 1), mar=c(0.5, 1, 1, 1), oma=c(4, 1, 1, 1))
@@ -19,7 +26,7 @@ snpLocLine <- function(list, list2 = NA, col1 = "purple", col2 = "orange", col3 
 				else arrows(listTemp0[, "POS"], c(1.3), listTemp0[, "POS"], c(1.05), length=0.025, col=col1, lwd=1.25)
 			}
 		}
-		if(!is.na(list2)){
+		if(!is.null(list2)){
 		  if(i %in% names(list2)){
 				k <- k+1
 				if(length(list2[[k]][,1]) > 0) {
@@ -158,7 +165,7 @@ for(i in 1:length(ST93AB.sig.var$gene)){
 ST93AB.sig.var$description <- description
 
 ST93AB.sig.var <- ST93AB.sig.var[order(ST93AB.sig.var$gene),]
-#write.csv(ST93AB.sig.var, "data_out/ST93AB/ST93clade-variants.csv", row.names=FALSE)
+write.csv(ST93AB.sig.var, "data_out/ST93AB/ST93clade-variants.csv", row.names=FALSE)
 
 ST93AB.sig.var$effect <- as.character(ST93AB.sig.var$effect)
 
@@ -170,7 +177,7 @@ ST93AB.sig.var$effect[ST93AB.sig.var$effect %in% c("SYNONYMOUS_CODING", "INTERGE
 ST93AB.sig.var$effect <- factor(ST93AB.sig.var$effect, levels=c("indel", "nonsynonymous", "upstream", "downstream", "synonymous"))
 
 ST93AB.sig.var.effect <- subset(ST93AB.sig.var, effect %in% c("nonsynonymous", "indel"))
-#write.csv(ST93AB.sig.var.effect, "manuscript/tables/TableS3_ST93clade-variants-effect.csv", row.names=FALSE)
+write.csv(ST93AB.sig.var.effect, "manuscript/tables/TableS3_ST93clade-variants-effect.csv", row.names=FALSE)
 
 ##################################################
 #barplots for effect type

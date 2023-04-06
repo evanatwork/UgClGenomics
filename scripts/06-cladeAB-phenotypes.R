@@ -68,7 +68,7 @@ names(ttest.WBC) <- c("phenotype", "W", "pvalue", "A-B")
 ttest.invitro<- data.frame("Phenotype" = c("temp"), "W" = 1, "pvalue" = 1, "A-B" =1)
 ttest.invitro$Phenotype <- as.character(ttest.invitro$Phenotype)
 
-invitrocols <- c(5:11)
+invitrocols <- c(7:13)
 k<-0
 for(i in invitrocols){
   k <- k+1

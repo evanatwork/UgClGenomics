@@ -8,19 +8,24 @@ locCalc <- function(dataset){
 	loc <- c()
 	for(i in 1:length(dataset[,1])){
 		gene <- subset(genes, name==dataset[i, ]$gene)
-		if(dataset[i, ]$effect %in% c("upstream", "UTR-5")){
-			if(gene$Strand == "+") loc[i] <- paste0("+", gene$chromStart - dataset[i, ]$pos)
-			else loc[i] <- paste0("+", dataset[i, ]$pos - gene$chromEnd)
+		if(nrow(gene) == 0) {
+		  loc[i] <- "null"
+		  warning(paste("Gene", dataset[i, ]$gene, "is in dataset but not in gene list."))
+		} else {
+  		if(dataset[i, ]$effect %in% c("upstream", "UTR-5")){
+  			if(gene$Strand == "+") loc[i] <- paste0("+", gene$chromStart - dataset[i, ]$pos)
+  			else loc[i] <- paste0("+", dataset[i, ]$pos - gene$chromEnd)
+  		}
+    	if(dataset[i, ]$effect %in% c("downstream", "UTR-3")){
+        if(gene$Strand == "+") loc[i] <- paste0("-", dataset[i,]$pos - gene$chromEnd)
+    		else loc[i] <- paste0("-", gene$chromStart - dataset[i, ]$pos)
+    	}
+    	if(dataset[i, ]$effect %nin% c("upstream", "UTR-5", "UTR-3", "downstream")){
+        if(gene$Strand == "+") loc[i] <- dataset[i,]$pos - gene$chromStart
+        else loc[i] <- gene$chromEnd - dataset[i,]$pos
+    	}
 		}
-	if(dataset[i, ]$effect %in% c("downstream", "UTR-3")){
-    if(gene$Strand == "+") loc[i] <- paste0("-", dataset[i,]$pos - gene$chromEnd)
-		else loc[i] <- paste0("-", gene$chromStart - dataset[i, ]$pos)
-	}
-	if(dataset[i, ]$effect %nin% c("upstream", "UTR-5", "UTR-3", "downstream")){
-    if(gene$Strand == "+") loc[i] <- dataset[i,]$pos - gene$chromStart
-    else loc[i] <- gene$chromEnd - dataset[i,]$pos
-}
-}
+  }
 	loc
 }
 
@@ -105,7 +110,7 @@ for(i in 1:length(geneP.all$gene)){
   else alias[i] <- as.character(subset(genes, name==as.character(geneP.all$gene[i]))$alias)
 }
 geneP.all$alias <- alias
-write.csv(geneP.all, "tables_intermediate/GWAS/190521genePall.csv", row.names=FALSE)
+write.csv(geneP.all, "data_out/GWAS/190521genePall.csv", row.names=FALSE)
 
 geneP.sig.all <- subset(geneP.all, numSig > 0)
 geneP.sig.2 <- subset(geneP.sig.all, numSig > 1)
@@ -120,6 +125,8 @@ geneP.sig.multi.only$class <- "b"
 geneP.sig.allTraits <- rbind(geneP.sig.multi.only, geneP.sig.2.only, geneP.sig.2.multi)
 geneP.sig.allTraits$CP <- paste(geneP.sig.allTraits$CHROM, geneP.sig.allTraits $POS, sep=".")
 geneP.sig.allTraits $gene <- as.character(geneP.sig.allTraits$gene)
+# ignore all that and just use geneP.all
+geneP.sig.allTraits <- geneP.all
 
 #WBC CP traits only
 WBC.P <- subset(geneP.WBC, CP %nin% geneP.CSF$CP)
@@ -151,7 +158,9 @@ WBC_inVitro.sig <- subset(WBC_inVitro.P, numSig > 0)
 #Gene is already in the all traits set
 WBC_inVitro.sig.allTraits <- subset(WBC_inVitro.sig, gene %in% geneP.sig.allTraits$gene)
 WBC_inVitro.sig.allTraits.2 <-  subset(WBC_inVitro.sig.allTraits, numSig > 1)
-WBC_inVitro.sig.allTraits.2$class <- c("ab")
+if(nrow(WBC_inVitro.sig.allTraits.2) > 0 ) {
+  WBC_inVitro.sig.allTraits.2$class <- c("ab")
+}
 WBC_inVitro.sig.allTraits.1 <-  subset(WBC_inVitro.sig.allTraits, numSig ==1)
 WBC_inVitro.sig.allTraits.1$class <- "b"
 
@@ -181,60 +190,64 @@ for(i in unique(geneP.sig.allTraits$gene)){
 	sub <- subset(geneP.sig.allTraits, gene==i)
 	allP <- unlist(sub[,7:37])
 	numSig <- subset(allP, allP < 0.05)
-		for(j in 1: nrow(sub)){
-			temp <- sub[j, 7:37]
-			temp.CP <- sub[j, "CP"]
-			sigP <- names(sub)[7:37][which(temp < 0.05)]
-			if(length(sigP)==1){
-					gene <- append(gene, sub$gene[j])
-					chr <- append(chr, sub$CHROM[j])
-					pheno <- append(pheno, paste(sigP, collapse=";"))
-					effect <- append(effect, sub[j, "effect"])
-					class <- append(class, sub[j, "class"])
-					pos <- append(pos, sub[j, "POS"])
-					numPhen <- append(numPhen, length(sigP))
-					if(sigP %in% names(geneOdds.CSF)) oddsProb <- append(oddsProb, subset(geneOdds.CSF, CP==temp.CP) [sigP])
-					if(sigP %in% names(geneOdds.WBC)) oddsProb <- append(oddsProb, subset(geneOdds.WBC, CP==temp.CP) [sigP])
-					if(sigP %in% names(geneOdds.INV)) oddsProb <- append(oddsProb, subset(geneOdds.INV, CP==temp.CP) [sigP])
-					if(sigP %in% names(geneStats.CSF)) stats <- append(stats, subset(geneStats.CSF, CP==temp.CP) [sigP])
-					if(sigP %in% names(geneStats.WBC)) stats <- append(stats, subset(geneStats.WBC, CP==temp.CP) [sigP])
-					if(sigP %in% names(geneStats.INV)) stats <- append(stats, subset(geneStats.INV, CP==temp.CP) [sigP])
-				}
-			if(length(sigP)>1){
-				 oddsTemp <- c()
-				 statsTemp <- c()
-					for(k in 1:length(sigP)){
-						gene <- append(gene, sub$gene[j])
-						chr <- append(chr, sub$CHROM[j])
-						pheno <- append(pheno, sigP[k])
-						effect <- append(effect, sub[j, "effect"])
-						class <- append(class, sub[j, "class"])
-						pos <- append(pos, sub[j, "POS"])
-						if(sigP[k] %in% names(geneOdds.CSF)) oddsTemp[k] <-  subset(geneOdds.CSF, CP==temp.CP) [sigP[k]]
-						if(sigP[k] %in% names(geneOdds.WBC))  oddsTemp[k] <-  subset(geneOdds.WBC, CP==temp.CP) [sigP[k]]
-						if(sigP[k] %in% names(geneOdds.INV))  oddsTemp[k]  <- subset(geneOdds.INV, CP==temp.CP) [sigP[k]]
-						if(sigP[k] %in% names(geneStats.CSF)) statsTemp[k] <- subset(geneStats.CSF, CP==temp.CP) [sigP[k]]
-						if(sigP[k] %in% names(geneStats.WBC)) statsTemp[k] <- subset(geneStats.WBC, CP==temp.CP) [sigP[k]]
-						if(sigP[k] %in% names(geneStats.INV)) statsTemp[k] <- subset(geneStats.INV, CP==temp.CP) [sigP[k]]
-					}
-				oddsProb <- append(oddsProb, oddsTemp)
-				stats <- append(stats, statsTemp)
-		}
+	for(j in 1: nrow(sub)){
+		temp <- sub[j, 7:37]
+		temp.CP <- sub[j, "CP"]
+	  sigP <- names(sub)[7:37][which(temp < 0.05)]
+	  if(length(sigP)==1){
+    	gene <- append(gene, sub$gene[j])
+	  	chr <- append(chr, sub$CHROM[j])
+			pheno <- append(pheno, paste(sigP, collapse=";"))
+		  effect <- append(effect, sub[j, "effect"])
+  		class <- append(class, sub[j, "class"])
+	  	pos <- append(pos, sub[j, "POS"])
+			numPhen <- append(numPhen, length(sigP))
+		  if(sigP %in% names(geneOdds.CSF)) oddsProb <- append(oddsProb, subset(geneOdds.CSF, CP==temp.CP) [sigP])
+		  if(sigP %in% names(geneOdds.WBC)) oddsProb <- append(oddsProb, subset(geneOdds.WBC, CP==temp.CP) [sigP])
+  		if(sigP %in% names(geneOdds.INV)) oddsProb <- append(oddsProb, subset(geneOdds.INV, CP==temp.CP) [sigP])
+	  	if(sigP %in% names(geneStats.CSF)) stats <- append(stats, subset(geneStats.CSF, CP==temp.CP) [sigP])
+			if(sigP %in% names(geneStats.WBC)) stats <- append(stats, subset(geneStats.WBC, CP==temp.CP) [sigP])
+		  if(sigP %in% names(geneStats.INV)) stats <- append(stats, subset(geneStats.INV, CP==temp.CP) [sigP])
+	  }
+  	if(length(sigP)>1){
+	  	oddsTemp <- c()
+			statsTemp <- c()
+		  for(k in 1:length(sigP)){
+  			gene <- append(gene, sub$gene[j])
+	  		chr <- append(chr, sub$CHROM[j])
+				pheno <- append(pheno, sigP[k])
+		  	effect <- append(effect, sub[j, "effect"])
+			  class <- append(class, sub[j, "class"])
+  			pos <- append(pos, sub[j, "POS"])
+	  		if(sigP[k] %in% names(geneOdds.CSF)) oddsTemp[k] <-  subset(geneOdds.CSF, CP==temp.CP) [sigP[k]]
+				if(sigP[k] %in% names(geneOdds.WBC))  oddsTemp[k] <-  subset(geneOdds.WBC, CP==temp.CP) [sigP[k]]
+		  	if(sigP[k] %in% names(geneOdds.INV))  oddsTemp[k]  <- subset(geneOdds.INV, CP==temp.CP) [sigP[k]]
+			  if(sigP[k] %in% names(geneStats.CSF)) statsTemp[k] <- subset(geneStats.CSF, CP==temp.CP) [sigP[k]]
+	  		if(sigP[k] %in% names(geneStats.WBC)) statsTemp[k] <- subset(geneStats.WBC, CP==temp.CP) [sigP[k]]
+  			if(sigP[k] %in% names(geneStats.INV)) statsTemp[k] <- subset(geneStats.INV, CP==temp.CP) [sigP[k]]
+		  }
+			oddsProb <- append(oddsProb, oddsTemp)
+			stats <- append(stats, statsTemp)
+  	}
 	}
 }
 
-#allSig_allPhen <- data.frame(gene, chr, pos, class, effect, pheno, oddsProb= unlist(oddsProb), stats= unlist(stats))
-allSig_allPhen <- data.frame(gene, chr, pos, class, effect, pheno, stats= unlist(stats))
+# Replace any missing rows with "unk".
+oddsProb <- rapply(oddsProb, function(x) ifelse(length(x)==0, "unk", x))
+stats <- rapply(stats, function(x) ifelse(length(x)==0, "unk", x))
+
+allSig_allPhen <- data.frame(gene, chr, pos, class, effect, pheno, oddsProb, stats)
+#allSig_allPhen <- data.frame(gene, chr, pos, class, effect, pheno)
 
 allSig_allPhen$CP <- paste(allSig_allPhen$chr, allSig_allPhen$pos, sep=".")
 allSig_allPhen <- allSig_allPhen[order(allSig_allPhen$gene),]
-#allSig_allPhen <- allSig_allPhen[, c("gene", "chr", "pos", "class", "effect", "pheno", "oddsProb", "stats")]
-allSig_allPhen <- allSig_allPhen[, c("gene", "chr", "pos", "class", "effect", "pheno", "stats")]
+allSig_allPhen <- allSig_allPhen[, c("gene", "chr", "pos", "class", "effect", "pheno", "oddsProb", "stats")]
+#allSig_allPhen <- allSig_allPhen[, c("gene", "chr", "pos", "class", "effect", "pheno")]
 
-#names(allSig_allPhen)[7] <- "odds ratio (CI)"
-#names(allSig_allPhen)[8] <- "logistic regression"
-names(allSig_allPhen)[7] <- "logistic regression"
-#write.csv(allSig_allPhen, "manuscript/tables/TableS7_geneP2-allsig-stats.csv", row.names=FALSE)
+names(allSig_allPhen)[7] <- "odds ratio (CI)"
+names(allSig_allPhen)[8] <- "logistic regression"
+#names(allSig_allPhen)[6] <- "logistic regression"
+write.csv(allSig_allPhen, "manuscript/tables/TableS7_geneP2-allsig-stats.csv", row.names=FALSE)
 
 #save with each variant on a different row
 sub <- c()
@@ -313,8 +326,12 @@ allSigCP <- allSigCP[order(allSigCP$gene),] #148 positions in 43 genes
 
 alias <- c()
 for(i in 1:length(allSigCP$gene)){
-  if(is.na(as.character(allSigCP$gene[i]))) alias[i] <- "null"
-  else alias[i] <- as.character(subset(genes, name==as.character(allSigCP$gene[i]))$alias)
+  if(is.na(as.character(allSigCP$gene[i]))
+     | nrow(subset(genes, name==as.character(allSigCP$gene[i]))) == 0) {
+    alias[i] <- "null"
+  } else {
+    alias[i] <- as.character(subset(genes, name==as.character(allSigCP$gene[i]))$alias)
+  }
 }
 allSigCP$alias <- alias
 allSigCP$numSig <- allSigCP$numSigSum

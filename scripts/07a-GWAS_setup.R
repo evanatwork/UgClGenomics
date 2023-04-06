@@ -39,7 +39,7 @@ dWBC <- read.csv("data_in/phenotypes/COAT_WBC.csv")
 
 CSFcols <- c(5:22, 24, 25)
 WBCcols <- c(5:9)
-invitrocols <- c(5:11)
+invitrocols <- c(7:13)
 ###########################
 #Read in variants files
 ###########################
